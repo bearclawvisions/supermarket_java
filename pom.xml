@@ -33,12 +33,12 @@
 
       <!-- DI for modules inside project -->
       <dependency>
-        <groupId>com.bearclawvisions.business</groupId>
+        <groupId>com.bearclawvisions</groupId>
         <artifactId>business</artifactId>
         <version>${project.version}</version>
       </dependency>
       <dependency>
-        <groupId>com.bearclawvisions.domain</groupId>
+        <groupId>com.bearclawvisions</groupId>
         <artifactId>domain</artifactId>
         <version>${project.version}</version>
       </dependency>
