@@ -13,15 +13,15 @@ public class UserService implements IUserService {
 
     @Override
     public UserDto getTestUser() {
-        return new UserDto(
-                new UUID(1, 1),
-                "Firstname",
-                "Lastname",
-                "test@mail.com",
-                false,
-                "2025-12-12",
-                null,
-                ApplicationRole.NONE
-        );
+        return new UserDto.Builder()
+                .id(new UUID(1, 1))
+                .firstName("Firstname")
+                .lastName("Lastname")
+                .email("test@mail.com")
+                .emailConfirmed(false)
+                .createdOn("2025-12-12")
+                .lastLogin(null)
+                .role(ApplicationRole.NONE)
+                .build();
     }
 }
