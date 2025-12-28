@@ -14,7 +14,7 @@ The project is split into 3 modules:
 # Dependency difference between Java and C#
 ## Dependency Injection .NET Core
 In C# (.NET) at startup Interface → implementation mapping. Constructor injection used in consumers.  
-```C#
+```csharp
 builder.Services.AddScoped<IUserService, UserService>();
 ```
 
@@ -66,3 +66,59 @@ Spring automatically finds @Service and registers it as a bean, then injects it 
 ### 2. Manual Registration
 It is also possible to register beans manually in a DependencyConfig.java as is used in this project.
 This approach is similar to .NET Core Dependency Injection and uses less auto-magic code in the project.
+---
+
+# Extension methods
+In C# a type can have extension methods by using `this` keyword in a static method. Java does not have this concept (syntactic sugar), but uses Utils class to achieve the same thing.
+
+## C# extension methods
+```csharp
+public static class StringExtensions
+{
+    public static bool AddBasicStringTemplate(this string input)
+    {
+        return input + " with a basic string template";
+    }
+}
+
+// Usage:
+var example = "Some string";
+var result = example.AddBasicStringTemplate();
+```
+
+## Java extension methods
+```java
+public class StringUtils {
+    public static String addBasicStringTemplate(String input) {
+        return input + " with a basic string template";
+    }
+}
+
+// Usage:
+String example = "Some string";
+String result = StringUtils.addBasicStringTemplate(example);
+```
+
+| Feature                    | C#                | Java               |
+| -------------------------- | ----------------- | ------------------ |
+| Extension method syntax    | `this Type param` | Not supported      |
+| Call like an instance      | Yes               | No                 |
+| Utility method alternative | Yes, static class | Yes, static method |
+| Interface default method   | N/A               | Limited use case   |
+---
+
+# Technical terms
+
+| C#                               | Java equivalent                                |
+|----------------------------------|------------------------------------------------|
+| ASP.NET Core                     | Spring Boot                                    |
+| .csproj                          | pom.xml                                        |
+| library(.csproj)                 | module                                         |
+| Startup.cs(or other entry point) | Application.java (main/@SpringBootApplication) |
+| .Net builder DI (or Autofac)     | Spring IoC Container                           |
+| Controller (inherit)             | @RestController (Spring)                       |
+| EF Core                          | JPA (Hibernate)                                |
+| Dapper                           | JBDI (?)                                       |
+| appsettings.json                 | application.properties / application.yml       |
+| [Annotation]                     | @Annotation (Bean)                             |
+| dotnet CLI / MSBuild             | Maven / Gradle / Other                         |
