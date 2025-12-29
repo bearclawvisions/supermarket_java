@@ -81,4 +81,37 @@ public class UserDto {
             return new UserDto(this);
         }
     }
+
+    // Getters for JSON
+    public UUID getId() {
+        return id;
+    }
+
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public boolean isEmailConfirmed() {
+        return emailConfirmed;
+    }
+
+    public String getCreatedOn() {
+        return createdOn;
+    }
+
+    public String getLastLogin() {
+        return lastLogin;
+    }
+
+    public ApplicationRole getRole() {
+        return role;
+    }
 }

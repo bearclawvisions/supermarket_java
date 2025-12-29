@@ -1,8 +1,10 @@
 package com.bearclawvisions.api.controllers;
 
 import com.bearclawvisions.api.contracts.ApiResponse;
+import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.dto.user.UserDto;
 import com.bearclawvisions.services.interfaces.IUserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -26,8 +28,7 @@ public class TestController { // java has no [AllowAnonymous] like C#
     public ResponseEntity<ApiResponse<String>> hello() {
         // this creates a simple JSON response
         //Map.of("message", "Hello World, directly from API!")
-        ApiResponse<String> response = new ApiResponse<>("Hello World, directly from API!");
-        return ResponseEntity.ok(response);
+        return ApiResponseBuilder.success("Hello World, directly from API!");
     }
 
 
@@ -36,8 +37,8 @@ public class TestController { // java has no [AllowAnonymous] like C#
         var user = userService.getTestUser();
 
         if (user == null)
-            return ResponseEntity.ok(new ApiResponse<UserDto>(false, "User not found"));
+            return ApiResponseBuilder.error(HttpStatus.NOT_FOUND, "User not found");
 
-        return ResponseEntity.ok(new ApiResponse<UserDto>("User found", user));
+        return ApiResponseBuilder.success(user);
     }
 }
