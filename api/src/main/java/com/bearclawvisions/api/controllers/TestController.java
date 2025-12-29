@@ -1,12 +1,17 @@
 package com.bearclawvisions.api.controllers;
 
+import com.bearclawvisions.api.contracts.ApiResponse;
+import com.bearclawvisions.dto.user.UserDto;
 import com.bearclawvisions.services.interfaces.IUserService;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.Map;
+
 @RestController
-@RequestMapping("/test")
+@RequestMapping(value = "/test", produces = "application/json")
 public class TestController { // java has no [AllowAnonymous] like C#
     // due to spring security controller is protected by default
     // set [AllowAnonymous] in config which is .permitAll() in Spring Security configuration
@@ -18,17 +23,21 @@ public class TestController { // java has no [AllowAnonymous] like C#
     }
 
     @GetMapping("/hello")
-    public String hello() {
-        return "Hello World, directly from API!";
+    public ResponseEntity<ApiResponse<String>> hello() {
+        // this creates a simple JSON response
+        //Map.of("message", "Hello World, directly from API!")
+        ApiResponse<String> response = new ApiResponse<>("Hello World, directly from API!");
+        return ResponseEntity.ok(response);
     }
 
+
     @GetMapping("/testuser")
-    public String testUser() {
+    public ResponseEntity<ApiResponse<UserDto>> testUser() {
         var user = userService.getTestUser();
 
         if (user == null)
-            return "No test user found!";
+            return ResponseEntity.ok(new ApiResponse<UserDto>(false, "User not found"));
 
-        return "Test from service success!";
+        return ResponseEntity.ok(new ApiResponse<UserDto>("User found", user));
     }
 }
