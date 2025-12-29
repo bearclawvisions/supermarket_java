@@ -1,14 +1,20 @@
 package com.bearclawvisions.services.implementations;
 
+import com.bearclawvisions.dto.user.RegisterDto;
 import com.bearclawvisions.dto.user.UserDto;
+import com.bearclawvisions.entitities.User;
 import com.bearclawvisions.enums.ApplicationRole;
+import com.bearclawvisions.repositories.UserRepository;
 import com.bearclawvisions.services.interfaces.IUserService;
 
 import java.util.UUID;
 
 public class UserService implements IUserService {
 
-    public UserService() {
+    private final UserRepository userRepository;
+
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
     }
 
     @Override
@@ -24,4 +30,29 @@ public class UserService implements IUserService {
                 .role(ApplicationRole.NONE)
                 .build();
     }
+
+    @Override
+    public String createUser(RegisterDto userDto) throws IllegalArgumentException {
+        if (!userDto.getPassword().equals(userDto.getConfirmPassword())) {
+            throw new IllegalArgumentException("Passwords do not match");
+        }
+
+        if (!userDto.acceptedTermsAndConditions()) {
+            throw new IllegalArgumentException("Terms and conditions must be accepted");
+        }
+
+        if (userRepository.findByEmail(userDto.getEmail()) != null) {
+            throw new IllegalArgumentException("Email already registered");
+        }
+
+        User newUser = User.registerUser(userDto);
+        User savedUser = userRepository.save(newUser);
+
+        if (savedUser.getId() == null) {
+            throw new IllegalStateException("Failed to create user");
+        }
+
+        return "User created successfully";
+    }
+
 }

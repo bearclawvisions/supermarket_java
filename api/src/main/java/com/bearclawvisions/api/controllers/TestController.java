@@ -11,7 +11,7 @@ public class TestController { // java has no [AllowAnonymous] like C#
     // due to spring security controller is protected by default
     // set [AllowAnonymous] in config which is .permitAll() in Spring Security configuration
 
-    final private IUserService userService; // could also be automagically @Autowired
+    private final IUserService userService; // could also be automagically @Autowired
 
     public TestController(IUserService userService) {
         this.userService = userService;

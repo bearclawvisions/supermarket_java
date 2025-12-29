@@ -7,7 +7,7 @@ import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.web.SecurityFilterChain;
 
-@Configuration // automagically injected by componentscan
+@Configuration // automagically injected by component scan
 @EnableWebSecurity
 public class SecurityConfig {
 
@@ -15,10 +15,16 @@ public class SecurityConfig {
     @Scope("singleton") // for some reason magic string? why not enum? has to be done manually, either create enum or custom Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
-                .authorizeHttpRequests(request -> request
-                        .requestMatchers("/test/**").permitAll() // everything from test controller
-                        .anyRequest().authenticated()
-                );
+            .authorizeHttpRequests(request -> request
+                .requestMatchers(
+                    "/test/**",
+                    "/auth/**",
+                    "/swagger-ui.html",
+                    "/swagger-ui/**",
+                    "/v3/api-docs/**"
+                ).permitAll()
+                .anyRequest().authenticated()
+            );
 
         return http.build();
     }
