@@ -1,6 +1,5 @@
 package com.bearclawvisions.api.controllers;
 
-import com.bearclawvisions.services.implementations.UserService;
 import com.bearclawvisions.services.interfaces.IUserService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
