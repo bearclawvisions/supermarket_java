@@ -50,6 +50,17 @@ public class ApiResponseBuilder {
         return ResponseEntity.ok(response);
     }
 
+    ///  Simple error response with message for business logic errors with stack trace
+    public static <T> ResponseEntity<ApiResponse<T>> error(String message, List<String> errors) {
+        ApiResponse<T> response = new ApiResponse.Builder<T>()
+                .isError()
+                .message(message)
+                .errors(errors)
+                .build();
+
+        return ResponseEntity.ok(response);
+    }
+
     ///  Error response with custom HttpStatus and message
     public static <T> ResponseEntity<ApiResponse<T>> error(HttpStatus status, String message) {
         ApiResponse<T> response = new ApiResponse.Builder<T>()
