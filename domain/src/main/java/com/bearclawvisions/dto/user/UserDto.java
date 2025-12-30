@@ -14,6 +14,17 @@ public class UserDto {
     private String lastLogin;
     private ApplicationRole role;
 
+    public UserDto(UUID id, String firstName, String lastName, String email, boolean emailConfirmed, String createdOn, String lastLogin, ApplicationRole role) {
+        this.id = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.email = email;
+        this.emailConfirmed = emailConfirmed;
+        this.createdOn = createdOn;
+        this.lastLogin = lastLogin;
+        this.role = role;
+    }
+
     private UserDto(Builder builder) {
         this.id = builder.id;
         this.firstName = builder.firstName;

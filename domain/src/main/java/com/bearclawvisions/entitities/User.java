@@ -72,6 +72,16 @@ public class User {
         return createdOn;
     }
 
+    public User() {
+        this.id = null;
+        this.email = null;
+        this.password = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.birthDate = null;
+        this.lastLogin = null;
+    }
+
     public User(String email, String password, String firstName, String lastName) {
         this.email = email;
         this.password = password;

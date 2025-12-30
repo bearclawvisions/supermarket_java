@@ -1,17 +1,23 @@
 package com.bearclawvisions.services.implementations;
 
+import com.bearclawvisions.dto.user.LoginDto;
 import com.bearclawvisions.dto.user.RegisterDto;
 import com.bearclawvisions.dto.user.UserDto;
 import com.bearclawvisions.entitities.User;
 import com.bearclawvisions.enums.ApplicationRole;
 import com.bearclawvisions.repositories.UserRepository;
 import com.bearclawvisions.services.interfaces.IUserService;
+import org.jspecify.annotations.NonNull;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.UUID;
 
 public class UserService implements IUserService {
 
     private final UserRepository userRepository;
+
+    private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
     public UserService(UserRepository userRepository) {
         this.userRepository = userRepository;
@@ -32,20 +38,24 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String createUser(RegisterDto userDto) throws IllegalArgumentException {
-        if (!userDto.getPassword().equals(userDto.getConfirmPassword())) {
+    public String createUser(@NonNull RegisterDto registerDto) throws IllegalArgumentException {
+        if (!registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
             throw new IllegalArgumentException("Passwords do not match");
         }
 
-        if (!userDto.acceptedTermsAndConditions()) {
+        String plainPassword = registerDto.getPassword();
+        String encodedPassword = passwordEncoder.encode(plainPassword);
+        registerDto.setPassword(encodedPassword);
+
+        if (!registerDto.acceptedTermsAndConditions()) {
             throw new IllegalArgumentException("Terms and conditions must be accepted");
         }
 
-        if (userRepository.findByEmail(userDto.getEmail()) != null) {
+        if (userRepository.findByEmail(registerDto.getEmail()) != null) {
             throw new IllegalArgumentException("Email already registered");
         }
 
-        User newUser = User.registerUser(userDto);
+        User newUser = User.registerUser(registerDto);
         User savedUser = userRepository.save(newUser);
 
         if (savedUser.getId() == null) {
@@ -55,4 +65,27 @@ public class UserService implements IUserService {
         return "User created successfully";
     }
 
+    @Override
+    public UserDto loginUser(@NonNull LoginDto loginDto) throws IllegalArgumentException {
+        User user = userRepository.findByEmail(loginDto.getEmail());
+
+        if (user == null) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+
+        if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
+            throw new IllegalArgumentException("Invalid email or password");
+        }
+
+        return new UserDto.Builder()
+                .id(user.getId())
+                .firstName(user.getFirstName())
+                .lastName(user.getLastName())
+                .email(user.getEmail())
+                .emailConfirmed(true)
+                .createdOn(user.getCreatedOn().toString())
+                .lastLogin(user.getLastLogin() != null ? user.getLastLogin().toString() : null)
+                .role(ApplicationRole.ADMIN) // todo change
+                .build();
+    }
 }
