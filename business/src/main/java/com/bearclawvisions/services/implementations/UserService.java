@@ -5,6 +5,7 @@ import com.bearclawvisions.dto.user.RegisterDto;
 import com.bearclawvisions.dto.user.UserDto;
 import com.bearclawvisions.entitities.User;
 import com.bearclawvisions.enums.ApplicationRole;
+import com.bearclawvisions.exceptions.BusinessException;
 import com.bearclawvisions.repositories.UserRepository;
 import com.bearclawvisions.services.interfaces.IUserService;
 import org.jspecify.annotations.NonNull;
@@ -38,9 +39,9 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public String createUser(@NonNull RegisterDto registerDto) throws IllegalArgumentException {
+    public String createUser(@NonNull RegisterDto registerDto) throws BusinessException {
         if (!registerDto.getPassword().equals(registerDto.getConfirmPassword())) {
-            throw new IllegalArgumentException("Passwords do not match");
+            throw new BusinessException("Passwords do not match");
         }
 
         String plainPassword = registerDto.getPassword();
@@ -48,33 +49,33 @@ public class UserService implements IUserService {
         registerDto.setPassword(encodedPassword);
 
         if (!registerDto.acceptedTermsAndConditions()) {
-            throw new IllegalArgumentException("Terms and conditions must be accepted");
+            throw new BusinessException("Terms and conditions must be accepted");
         }
 
         if (userRepository.findByEmail(registerDto.getEmail()) != null) {
-            throw new IllegalArgumentException("Email already registered");
+            throw new BusinessException("Email already registered");
         }
 
         User newUser = User.registerUser(registerDto);
         User savedUser = userRepository.save(newUser);
 
         if (savedUser.getId() == null) {
-            throw new IllegalStateException("Failed to create user");
+            throw new BusinessException("Failed to create user");
         }
 
         return "User created successfully";
     }
 
     @Override
-    public UserDto loginUser(@NonNull LoginDto loginDto) throws IllegalArgumentException {
+    public UserDto loginUser(@NonNull LoginDto loginDto) throws BusinessException {
         User user = userRepository.findByEmail(loginDto.getEmail());
 
         if (user == null) {
-            throw new IllegalArgumentException("Invalid email or password");
+            throw new BusinessException("Invalid email or password");
         }
 
         if (!passwordEncoder.matches(loginDto.getPassword(), user.getPassword())) {
-            throw new IllegalArgumentException("Invalid email or password");
+            throw new BusinessException("Invalid email or password");
         }
 
         return new UserDto.Builder()
