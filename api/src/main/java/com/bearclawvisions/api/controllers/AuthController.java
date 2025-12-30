@@ -1,5 +1,6 @@
 package com.bearclawvisions.api.controllers;
 
+import com.bearclawvisions.api.annotations.ApiController;
 import com.bearclawvisions.api.contracts.ApiResponse;
 import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.api.helpers.JwtUtil;
@@ -11,13 +12,10 @@ import com.bearclawvisions.services.interfaces.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@RestController
-@RequestMapping(value = "/auth", produces = "application/json")
+@ApiController(value = "/auth")
 public class AuthController {
 
     private final IUserService userService;

@@ -1,5 +1,6 @@
 package com.bearclawvisions.api.controllers;
 
+import com.bearclawvisions.api.annotations.ApiController;
 import com.bearclawvisions.api.contracts.ApiResponse;
 import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.dto.user.UserDto;
@@ -7,13 +8,8 @@ import com.bearclawvisions.services.interfaces.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Map;
-
-@RestController
-@RequestMapping(value = "/test", produces = "application/json")
+@ApiController(value = "/test")
 public class TestController { // java has no [AllowAnonymous] like C#
     // due to spring security controller is protected by default
     // set [AllowAnonymous] in config which is .permitAll() in Spring Security configuration
