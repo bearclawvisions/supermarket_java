@@ -1,4 +1,5 @@
 # Notes
+[Other External reference](https://medium.com/@vikpoca/moving-from-c-to-java-platforms-overview-e9f3600acd6f)  
 This is a small project to get familiar with Java when coming from .NET.
 Similarities and differences between Java and C# for a .NET developer.
 
