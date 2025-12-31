@@ -123,3 +123,25 @@ String result = StringUtils.addBasicStringTemplate(example);
 | appsettings.json                 | application.properties / application.yml       |
 | [Annotation]                     | @Annotation (Bean)                             |
 | dotnet CLI / MSBuild             | Maven / Gradle / Other                         |
+
+# JPA vs EFCore
+EFCore has an explicit DbContext class that is used to interact with the database.
+JPA uses an implicit EntityManager (hidden) class that is used to interact with the database.
+EFCore supports fluent API for configuring the database schema, while JPA uses annotations on entities.
+EFCore puts queries in a transaction by default, Java has to use @Transactional annotation.
+
+```java
+@Transactional  // This wraps everything in one transaction
+public void createUserWithOrders(User user, List<Order> orders) {
+    userRepository.save(user);      // Not committed yet
+    orders.forEach(orderRepository::save);  // Not committed yet
+    // All commits together at method end (like SaveChanges())
+}
+```
+
+| EFCore                    | JPA            |
+|---------------------------|----------------|
+| DbContext                 | EntityManager  |
+| DbSet                     | Entity         |
+| SaveChangesAsync          | @Transactional |
+| SaveChangesAsync (single) | .save (on repo) |
