@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 
 import java.util.List;
 
-@ControllerAdvice
+@ControllerAdvice(basePackages = "com.bearclawvisions.api.controllers")
 public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
