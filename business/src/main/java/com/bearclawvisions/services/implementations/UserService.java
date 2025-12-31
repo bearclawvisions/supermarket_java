@@ -86,7 +86,7 @@ public class UserService implements IUserService {
                 .emailConfirmed(true)
                 .createdOn(user.getCreatedOn().toString())
                 .lastLogin(user.getLastLogin() != null ? user.getLastLogin().toString() : null)
-                .role(ApplicationRole.ADMIN) // todo change
+                .role(user.getRole())
                 .build();
     }
 }

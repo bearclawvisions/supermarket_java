@@ -1,7 +1,7 @@
 package com.bearclawvisions.entitities;
 
 import com.bearclawvisions.dto.user.RegisterDto;
-import com.bearclawvisions.dto.user.UserDto;
+import com.bearclawvisions.enums.ApplicationRole;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.Size;
 
@@ -40,6 +40,40 @@ public class User {
     @Column(nullable = false, updatable = false, name = "created_on")
     private final LocalDateTime createdOn = LocalDateTime.now();
 
+    @Column(nullable = false, name = "role")
+    private ApplicationRole role;
+
+    // Constructors
+    public User() {
+        this.id = null;
+        this.email = null;
+        this.password = null;
+        this.firstName = null;
+        this.lastName = null;
+        this.birthDate = null;
+        this.lastLogin = null;
+        this.role = ApplicationRole.NONE;
+    }
+
+    public User(String email, String password, String firstName, String lastName, ApplicationRole role) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+    }
+
+    public static User registerUser(RegisterDto newUser) {
+        return new User(
+                newUser.getEmail(),
+                newUser.getPassword(),
+                newUser.getFirstName(),
+                newUser.getLastName(),
+                ApplicationRole.CUSTOMER // self-registration is only for customers, other roles are managed by admin
+        );
+    }
+
+    // Getters
     public UUID getId() {
         return id;
     }
@@ -72,29 +106,7 @@ public class User {
         return createdOn;
     }
 
-    public User() {
-        this.id = null;
-        this.email = null;
-        this.password = null;
-        this.firstName = null;
-        this.lastName = null;
-        this.birthDate = null;
-        this.lastLogin = null;
-    }
-
-    public User(String email, String password, String firstName, String lastName) {
-        this.email = email;
-        this.password = password;
-        this.firstName = firstName;
-        this.lastName = lastName;
-    }
-
-    public static User registerUser(RegisterDto newUser) {
-        return new User(
-            newUser.getEmail(),
-            newUser.getPassword(),
-            newUser.getFirstName(),
-            newUser.getLastName()
-        );
+    public ApplicationRole getRole() {
+        return role;
     }
 }
