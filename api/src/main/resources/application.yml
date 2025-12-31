@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: "api"
+  jpa:
+    hibernate:
+      ddl-auto: none # Do NOT modify database
+    database-platform: "org.hibernate.dialect.PostgreSQLDialect"
+    show-sql: "true" # Optional for logging SQL
+    properties:
+      hibernate:
+        format_sql: "true"
+  datasource:
+    url: "jdbc:postgresql://${DB_HOST}/${DB_NAME}"
+    username: "${DB_USERNAME}"
+    password: "${DB_PASSWORD}"
+  devtools:
+    add-properties: "true"
+
+server:
+  servlet:
+    context-path: "/api" # set base path for api
+
+logging:
+  level:
+    web: "DEBUG"
