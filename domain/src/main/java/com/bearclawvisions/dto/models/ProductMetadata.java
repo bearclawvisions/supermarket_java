@@ -46,7 +46,7 @@ public class ProductMetadata {
     @XmlElement(required = true)
     private String extraInfo;
 
-    // Constructors
+    // region Constructors
     public ProductMetadata() {
     }
 
@@ -66,8 +66,9 @@ public class ProductMetadata {
         this.tags = Objects.requireNonNull(tags, "Tags cannot be null");
         this.extraInfo = Objects.requireNonNull(extraInfo, "ExtraInfo cannot be null");
     }
+    // endregion
 
-    // Getters and Setters
+    // region Getters and Setters
     public String getName() {
         return name;
     }
@@ -155,4 +156,5 @@ public class ProductMetadata {
     public void setExtraInfo(String extraInfo) {
         this.extraInfo = Objects.requireNonNull(extraInfo, "ExtraInfo cannot be null");
     }
+    // endregion
 }

@@ -14,6 +14,7 @@ public class UserDto {
     private String lastLogin;
     private ApplicationRole role;
 
+    // region Constructors
     public UserDto(UUID id, String firstName, String lastName, String email, boolean emailConfirmed, String createdOn, String lastLogin, ApplicationRole role) {
         this.id = id;
         this.firstName = firstName;
@@ -35,6 +36,7 @@ public class UserDto {
         this.lastLogin = builder.lastLogin;
         this.role = builder.role;
     }
+    // endregion
 
     // this can be simplified with Lombok @Builder annotation
     // this way building can be customized like with a fullname? firstName + " " + lastName
@@ -93,7 +95,7 @@ public class UserDto {
         }
     }
 
-    // Getters for JSON
+    // region Getters for JSON
     public UUID getId() {
         return id;
     }
@@ -125,4 +127,5 @@ public class UserDto {
     public ApplicationRole getRole() {
         return role;
     }
+    // endregion
 }

@@ -43,7 +43,7 @@ public class User {
     @Column(nullable = false, name = "role")
     private ApplicationRole role;
 
-    // Constructors
+    // region Constructors
     public User() {
         this.id = null;
         this.email = null;
@@ -72,8 +72,9 @@ public class User {
                 ApplicationRole.CUSTOMER // self-registration is only for customers, other roles are managed by admin
         );
     }
+    // endregion
 
-    // Getters
+    // region Getters
     public UUID getId() {
         return id;
     }
@@ -109,4 +110,5 @@ public class User {
     public ApplicationRole getRole() {
         return role;
     }
+    // endregion
 }

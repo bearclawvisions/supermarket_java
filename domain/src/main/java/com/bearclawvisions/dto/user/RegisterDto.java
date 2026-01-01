@@ -10,6 +10,7 @@ public class RegisterDto {
 
     // No-arg constructor for Jackson deserialization, otherwise construction of JSON fails
     // could also be done with @JsonProperty
+    // region Constructors
     public RegisterDto() {
         this.firstName = null;
         this.lastName = null;
@@ -27,7 +28,9 @@ public class RegisterDto {
         this.confirmPassword = confirmPassword;
         this.termsAndConditions = termsAndConditions;
     }
+    // endregion
 
+    // region Getters and Setters
     public String getFirstName() {
         return firstName;
     }
@@ -75,4 +78,5 @@ public class RegisterDto {
     public void setTermsAndConditions(boolean termsAndConditions) {
         this.termsAndConditions = termsAndConditions;
     }
+    // endregion
 }

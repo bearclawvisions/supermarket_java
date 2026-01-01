@@ -123,6 +123,7 @@ String result = StringUtils.addBasicStringTemplate(example);
 | appsettings.json                 | application.properties / application.yml       |
 | [Annotation]                     | @Annotation (Bean)                             |
 | dotnet CLI / MSBuild             | Maven / Gradle / Other                         |
+---
 
 # JPA vs EFCore
 EFCore has an explicit DbContext class that is used to interact with the database.

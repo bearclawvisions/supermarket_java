@@ -18,7 +18,7 @@ public class NutritionalValue {
     @XmlElement(required = true)
     private double fats;
 
-    // Constructors
+    // region Constructors
     public NutritionalValue() {
     }
 
@@ -28,8 +28,9 @@ public class NutritionalValue {
         this.carbohydrates = carbohydrates;
         this.fats = fats;
     }
+    // endregion
 
-    // Getters and Setters
+    // region Getters and Setters
     public double getCalories() {
         return calories;
     }
@@ -61,4 +62,5 @@ public class NutritionalValue {
     public void setFats(double fats) {
         this.fats = fats;
     }
+    // endregion
 }
