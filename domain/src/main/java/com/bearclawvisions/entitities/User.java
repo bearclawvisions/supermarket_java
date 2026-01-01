@@ -38,7 +38,7 @@ public class User {
     private LocalDateTime lastLogin;
 
     @Column(nullable = false, updatable = false, name = "created_on")
-    private final LocalDateTime createdOn = LocalDateTime.now();
+    private final LocalDateTime createdOn = LocalDateTime.now(); // actually conflicts with postgresql CURRENT_TIMESTAMP, overrides database default
 
     @Column(nullable = false, name = "role")
     private ApplicationRole role;
