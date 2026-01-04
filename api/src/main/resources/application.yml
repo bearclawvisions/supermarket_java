@@ -1,6 +1,8 @@
 spring:
   application:
     name: "api"
+  config:
+    import: optional:file:.env[.properties]
   jpa:
     hibernate:
       ddl-auto: none # Do NOT modify database
