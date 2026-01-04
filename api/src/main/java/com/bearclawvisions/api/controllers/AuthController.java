@@ -9,15 +9,14 @@ import com.bearclawvisions.dto.user.RegisterDto;
 import com.bearclawvisions.dto.user.UserDto;
 import com.bearclawvisions.services.interfaces.IUserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.List;
-
 @RestController
-@RequestMapping(value = "/auth", produces = "application/json")
+@RequestMapping(value = "/auth", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class AuthController {
 
     private final IUserService userService;

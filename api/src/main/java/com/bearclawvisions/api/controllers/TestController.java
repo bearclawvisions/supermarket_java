@@ -6,12 +6,13 @@ import com.bearclawvisions.dto.user.UserDto;
 import com.bearclawvisions.services.interfaces.IUserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping(value = "/test", produces = "application/json")
+@RequestMapping(value = "/test", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class TestController { // java has no [AllowAnonymous] like C#
     // due to spring security controller is protected by default
     // set [AllowAnonymous] in config which is .permitAll() in Spring Security configuration
