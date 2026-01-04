@@ -4,6 +4,7 @@ import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlElementWrapper;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
@@ -23,7 +24,7 @@ public class ProductMetadata {
     private String image;
 
     @XmlElement
-    private double price;
+    private BigDecimal price;
 
     @XmlElement(required = true)
     private String productType;
@@ -51,7 +52,7 @@ public class ProductMetadata {
     }
 
     public ProductMetadata(String name, String brand, String description, String image,
-                           double price, String productType, NutritionalValue nutritionalValue,
+                           BigDecimal price, String productType, NutritionalValue nutritionalValue,
                            List<String> ingredients, List<String> allergens, List<String> tags,
                            String extraInfo) {
         this.name = Objects.requireNonNull(name, "Name cannot be null");
@@ -101,11 +102,11 @@ public class ProductMetadata {
         this.image = Objects.requireNonNull(image, "Image cannot be null");
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

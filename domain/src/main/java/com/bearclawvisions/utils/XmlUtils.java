@@ -25,17 +25,21 @@ public class XmlUtils {
             throw new IllegalArgumentException("Object cannot be null");
         }
 
-        JAXBContext context = JAXBContext.newInstance(obj.getClass());
-        Marshaller marshaller = context.createMarshaller();
+        try {
+            JAXBContext context = JAXBContext.newInstance(obj.getClass());
+            Marshaller marshaller = context.createMarshaller();
 
-        marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, indent);
-        marshaller.setProperty(Marshaller.JAXB_FRAGMENT, omitXmlDeclaration);
-        marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
+            marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, indent);
+            marshaller.setProperty(Marshaller.JAXB_FRAGMENT, omitXmlDeclaration);
+            marshaller.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 
-        StringWriter stringWriter = new StringWriter();
-        marshaller.marshal(obj, stringWriter);
+            StringWriter stringWriter = new StringWriter();
+            marshaller.marshal(obj, stringWriter);
 
-        return stringWriter.toString();
+            return stringWriter.toString();
+        } catch (JAXBException e) {
+            throw new JAXBException("Failed to serialize object to XML", e);
+        }
     }
 
     /**
