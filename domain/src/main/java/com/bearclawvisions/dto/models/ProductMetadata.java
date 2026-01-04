@@ -1,14 +1,13 @@
 package com.bearclawvisions.dto.models;
 
-import jakarta.xml.bind.annotation.XmlElement;
-import jakarta.xml.bind.annotation.XmlElementWrapper;
-import jakarta.xml.bind.annotation.XmlRootElement;
+import jakarta.xml.bind.annotation.*;
 
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Objects;
 
 @XmlRootElement(name = "ProductMetadata")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class ProductMetadata {
 
     @XmlElement(required = true)

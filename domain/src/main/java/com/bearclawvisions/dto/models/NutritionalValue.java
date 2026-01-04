@@ -1,9 +1,12 @@
 package com.bearclawvisions.dto.models;
 
+import jakarta.xml.bind.annotation.XmlAccessType;
+import jakarta.xml.bind.annotation.XmlAccessorType;
 import jakarta.xml.bind.annotation.XmlElement;
 import jakarta.xml.bind.annotation.XmlRootElement;
 
 @XmlRootElement(name = "NutritionalValue")
+@XmlAccessorType(XmlAccessType.FIELD)
 public class NutritionalValue {
 
     @XmlElement(required = true)
