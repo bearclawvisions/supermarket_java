@@ -1,0 +1,459 @@
+{
+  "products": [
+    {
+      "name": "Granny Smith",
+      "category": "Fruit",
+      "type": "apple",
+      "brand": "Granny Smith",
+      "description": "A slightly sour apple perfect for making apple pie.",
+      "price-kg": "8.00",
+      "ingredients": "",
+      "nutritional-value": {
+        "calories": "50",
+        "protein": "1",
+        "fat": "1",
+        "carbohydrate": "12"
+      },
+      "allergen": "",
+      "extra-info": ""
+    },
+    {
+      "name": "Wholegrain Bread",
+      "category": "Bakery",
+      "type": "bread",
+      "brand": "Le petit moulin",
+      "description": "Freshly baked bread. Save it for later in the freezer for 2 weeks.",
+      "price-kg": "2.49",
+      "ingredients": "",
+      "nutritional-value": {
+        "calories": "265",
+        "protein": "8.7",
+        "fat": "2.4",
+        "carbohydrate": "50.2"
+      },
+      "allergen": "Gluten",
+      "extra-info": ""
+    },
+    {
+      "name": "Whole Milk",
+      "category": "Dairy",
+      "type": "milk",
+      "brand": "Fresh Farm",
+      "description": "Fresh whole milk from local farms. Rich in calcium and protein.",
+      "price-kg": "1.89",
+      "ingredients": "Pasteurized whole milk",
+      "nutritional-value": {
+        "calories": "60",
+        "protein": "3.2",
+        "fat": "3.3",
+        "carbohydrate": "4.8"
+      },
+      "allergen": "Milk",
+      "extra-info": "Best before 5 days"
+    },
+    {
+      "name": "Large Eggs",
+      "category": "Dairy",
+      "type": "eggs",
+      "brand": "Happy Hens",
+      "description": "Free-range large eggs from happy hens. Perfect for baking and cooking.",
+      "price-kg": "3.99",
+      "ingredients": "Eggs",
+      "nutritional-value": {
+        "calories": "155",
+        "protein": "13",
+        "fat": "11",
+        "carbohydrate": "1.1"
+      },
+      "allergen": "Eggs",
+      "extra-info": "12 eggs per pack"
+    },
+    {
+      "name": "Bananas",
+      "category": "fruit",
+      "type": "banana",
+      "brand": "Tropical Fresh",
+      "description": "Sweet and ripe bananas rich in potassium and natural sugars.",
+      "price-kg": "2.99",
+      "ingredients": "",
+      "nutritional-value": {
+        "calories": "89",
+        "protein": "1.1",
+        "fat": "0.3",
+        "carbohydrate": "23"
+      },
+      "allergen": "",
+      "extra-info": ""
+    },
+    {
+      "name": "Roma Tomatoes",
+      "category": "vegetable",
+      "type": "tomato",
+      "brand": "Garden Fresh",
+      "description": "Juicy roma tomatoes perfect for sauces and salads.",
+      "price-kg": "4.50",
+      "ingredients": "",
+      "nutritional-value": {
+        "calories": "18",
+        "protein": "0.9",
+        "fat": "0.2",
+        "carbohydrate": "3.9"
+      },
+      "allergen": "",
+      "extra-info": ""
+    },
+    {
+      "name": "Ground Beef",
+      "category": "Meat",
+      "type": "beef",
+      "brand": "Prime Cuts",
+      "description": "Fresh ground beef 85% lean. Perfect for burgers and meatballs.",
+      "price-kg": "12.99",
+      "ingredients": "Ground beef",
+      "nutritional-value": {
+        "calories": "250",
+        "protein": "26",
+        "fat": "15",
+        "carbohydrate": "0"
+      },
+      "allergen": "",
+      "extra-info": "Use within 2 days"
+    },
+    {
+      "name": "Chicken Breast",
+      "category": "Meat",
+      "type": "chicken",
+      "brand": "Farm Fresh",
+      "description": "Boneless skinless chicken breast. High in protein, low in fat.",
+      "price-kg": "9.99",
+      "ingredients": "Chicken breast",
+      "nutritional-value": {
+        "calories": "165",
+        "protein": "31",
+        "fat": "3.6",
+        "carbohydrate": "0"
+      },
+      "allergen": "",
+      "extra-info": "Use within 3 days"
+    },
+    {
+      "name": "White Rice",
+      "category": "Grains",
+      "type": "rice",
+      "brand": "Golden Grain",
+      "description": "Long grain white rice. Perfect side dish for any meal.",
+      "price-kg": "2.29",
+      "ingredients": "Enriched white rice",
+      "nutritional-value": {
+        "calories": "130",
+        "protein": "2.7",
+        "fat": "0.3",
+        "carbohydrate": "28"
+      },
+      "allergen": "",
+      "extra-info": "Store in cool dry place"
+    },
+    {
+      "name": "Pasta Penne",
+      "category": "Grains",
+      "type": "pasta",
+      "brand": "Italian Kitchen",
+      "description": "Classic penne pasta made from durum wheat. Cooks in 10 minutes.",
+      "price-kg": "1.99",
+      "ingredients": "Durum wheat semolina",
+      "nutritional-value": {
+        "calories": "131",
+        "protein": "5",
+        "fat": "1.1",
+        "carbohydrate": "25"
+      },
+      "allergen": "Gluten",
+      "extra-info": ""
+    },
+    {
+      "name": "Cheddar Cheese",
+      "category": "Dairy",
+      "type": "cheese",
+      "brand": "Dairy Delight",
+      "description": "Sharp cheddar cheese aged for rich flavor. Great for sandwiches.",
+      "price-kg": "8.99",
+      "ingredients": "Pasteurized milk, salt, cheese cultures, enzymes",
+      "nutritional-value": {
+        "calories": "113",
+        "protein": "7",
+        "fat": "9",
+        "carbohydrate": "1"
+      },
+      "allergen": "Milk",
+      "extra-info": ""
+    },
+    {
+      "name": "Carrots",
+      "category": "vegetable",
+      "type": "carrot",
+      "brand": "Fresh Fields",
+      "description": "Crisp orange carrots rich in beta-carotene and fiber.",
+      "price-kg": "1.79",
+      "ingredients": "",
+      "nutritional-value": {
+        "calories": "41",
+        "protein": "0.9",
+        "fat": "0.2",
+        "carbohydrate": "10"
+      },
+      "allergen": "",
+      "extra-info": ""
+    },
+    {
+      "name": "Greek Yogurt",
+      "category": "Dairy",
+      "type": "yogurt",
+      "brand": "Mediterranean Style",
+      "description": "Thick and creamy Greek yogurt with live active cultures.",
+      "price-kg": "5.49",
+      "ingredients": "Pasteurized milk, live active cultures",
+      "nutritional-value": {
+        "calories": "100",
+        "protein": "17",
+        "fat": "0",
+        "carbohydrate": "6"
+      },
+      "allergen": "Milk",
+      "extra-info": ""
+    },
+    {
+      "name": "Olive Oil",
+      "category": "Condiments",
+      "type": "oil",
+      "brand": "Mediterranean Gold",
+      "description": "Extra virgin olive oil cold-pressed for maximum flavor.",
+      "price-kg": "12.99",
+      "ingredients": "Extra virgin olive oil",
+      "nutritional-value": {
+        "calories": "884",
+        "protein": "0",
+        "fat": "100",
+        "carbohydrate": "0"
+      },
+      "allergen": "",
+      "extra-info": "500ml bottle"
+    },
+    {
+      "name": "Salmon Fillet",
+      "category": "Seafood",
+      "type": "fish",
+      "brand": "Ocean Fresh",
+      "description": "Fresh Atlantic salmon fillet rich in omega-3 fatty acids.",
+      "price-kg": "24.99",
+      "ingredients": "Atlantic salmon",
+      "nutritional-value": {
+        "calories": "208",
+        "protein": "22",
+        "fat": "12",
+        "carbohydrate": "0"
+      },
+      "allergen": "Fish",
+      "extra-info": "Wild caught"
+    },
+    {
+      "name": "Spinach",
+      "category": "vegetable",
+      "type": "leafy green",
+      "brand": "Green Harvest",
+      "description": "Fresh baby spinach leaves perfect for salads and cooking.",
+      "price-kg": "6.99",
+      "ingredients": "",
+      "nutritional-value": {
+        "calories": "23",
+        "protein": "2.9",
+        "fat": "0.4",
+        "carbohydrate": "3.6"
+      },
+      "allergen": "",
+      "extra-info": "Pre-washed"
+    },
+    {
+      "name": "Orange Juice",
+      "category": "Beverages",
+      "type": "juice",
+      "brand": "Sunrise Fresh",
+      "description": "100% pure orange juice with no added sugar or preservatives.",
+      "price-kg": "4.99",
+      "ingredients": "Orange juice concentrate, water",
+      "nutritional-value": {
+        "calories": "45",
+        "protein": "0.7",
+        "fat": "0.2",
+        "carbohydrate": "10.4"
+      },
+      "allergen": "",
+      "extra-info": "1L carton"
+    },
+    {
+      "name": "Potatoes",
+      "category": "vegetable",
+      "type": "potato",
+      "brand": "Farm Select",
+      "description": "Russet potatoes perfect for baking, mashing, or frying.",
+      "price-kg": "2.49",
+      "ingredients": "",
+      "nutritional-value": {
+        "calories": "77",
+        "protein": "2",
+        "fat": "0.1",
+        "carbohydrate": "17"
+      },
+      "allergen": "",
+      "extra-info": ""
+    },
+    {
+      "name": "Butter",
+      "category": "Dairy",
+      "type": "butter",
+      "brand": "Creamy Fresh",
+      "description": "Unsalted butter made from fresh cream. Perfect for baking.",
+      "price-kg": "6.99",
+      "ingredients": "Pasteurized cream, salt",
+      "nutritional-value": {
+        "calories": "717",
+        "protein": "0.9",
+        "fat": "81",
+        "carbohydrate": "0.1"
+      },
+      "allergen": "Milk",
+      "extra-info": "454g package"
+    },
+    {
+      "name": "Onions",
+      "category": "vegetable",
+      "type": "onion",
+      "brand": "Valley Fresh",
+      "description": "Yellow onions perfect for cooking and adding flavor to dishes.",
+      "price-kg": "2.99",
+      "ingredients": "",
+      "nutritional-value": {
+        "calories": "40",
+        "protein": "1.1",
+        "fat": "0.1",
+        "carbohydrate": "9.3"
+      },
+      "allergen": "",
+      "extra-info": ""
+    },
+    {
+      "name": "Cereal",
+      "category": "Breakfast",
+      "type": "cereal",
+      "brand": "Morning Crunch",
+      "description": "Whole grain cereal with vitamins and minerals. Great with milk.",
+      "price-kg": "4.99",
+      "ingredients": "Whole grain oats, wheat, rice, vitamins, minerals",
+      "nutritional-value": {
+        "calories": "110",
+        "protein": "3",
+        "fat": "2",
+        "carbohydrate": "22"
+      },
+      "allergen": "Gluten",
+      "extra-info": "500g box"
+    }
+  ],
+  "categories": [
+    {
+      "name": "Bakery",
+      "description": "Our lovely bread corner of baked goodness."
+    },
+    {
+      "name": "Dairy",
+      "description": "Fresh dairy products including milk, cheese, yogurt, and eggs."
+    },
+    {
+      "name": "Meat",
+      "description": "Premium quality fresh meats and poultry from trusted suppliers."
+    },
+    {
+      "name": "Seafood",
+      "description": "Fresh fish and seafood caught daily for the finest quality."
+    },
+    {
+      "name": "Fruit",
+      "description": "Fresh seasonal fruits picked at peak ripeness for maximum flavor."
+    },
+    {
+      "name": "Vegetable",
+      "description": "Crisp and fresh vegetables sourced from local farms."
+    },
+    {
+      "name": "Frozen Foods",
+      "description": "Convenient frozen meals, vegetables, and desserts for busy lifestyles."
+    },
+    {
+      "name": "Pantry Staples",
+      "description": "Essential cooking ingredients and non-perishable items for your kitchen."
+    },
+    {
+      "name": "Beverages",
+      "description": "Refreshing drinks including juices, sodas, water, and specialty beverages."
+    },
+    {
+      "name": "Snacks",
+      "description": "Delicious snacks and treats for any time of day."
+    },
+    {
+      "name": "Breakfast",
+      "description": "Start your day right with our selection of cereals, oats, and breakfast items."
+    },
+    {
+      "name": "Grains",
+      "description": "Wholesome grains, rice, pasta, and bread for nutritious meals."
+    },
+    {
+      "name": "Condiments",
+      "description": "Flavorful sauces, oils, vinegars, and seasonings to enhance your cooking."
+    },
+    {
+      "name": "Canned Goods",
+      "description": "Convenient canned vegetables, fruits, soups, and preserved foods."
+    },
+    {
+      "name": "Personal Care",
+      "description": "Health and beauty products for your daily personal care routine."
+    },
+    {
+      "name": "Household",
+      "description": "Cleaning supplies and household essentials to keep your home spotless."
+    },
+    {
+      "name": "Baby Care",
+      "description": "Everything you need for your little ones including food, diapers, and care products."
+    },
+    {
+      "name": "Pet Supplies",
+      "description": "Quality food and accessories for your beloved furry friends."
+    },
+    {
+      "name": "Health & Wellness",
+      "description": "Vitamins, supplements, and health products to support your well-being."
+    },
+    {
+      "name": "International Foods",
+      "description": "Authentic ingredients and specialty items from around the world."
+    },
+    {
+      "name": "Organic",
+      "description": "Certified organic products for a healthier and more sustainable lifestyle."
+    },
+    {
+      "name": "Deli",
+      "description": "Fresh prepared foods, sandwiches, and gourmet items made daily."
+    },
+    {
+      "name": "Bulk Foods",
+      "description": "Buy in bulk and save on nuts, grains, spices, and dried goods."
+    },
+    {
+      "name": "Pharmacy",
+      "description": "Prescription medications and over-the-counter health remedies."
+    }
+  ]
+}

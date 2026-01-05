@@ -34,8 +34,8 @@ public class Product extends Audit {
     private String name;
 
     //@NotBlank(message = "Metadata cannot be blank")
-    @Column(name = "metadata", columnDefinition = "xml")
-    private String metadata;
+    @Column(name = "metadata_xml", columnDefinition = "xml")
+    private String metadataXml;
 
     //@NotNull(message = "Price cannot be null")
     @DecimalMin(value = "0", inclusive = true)
@@ -83,12 +83,12 @@ public class Product extends Audit {
         this.name = name;
     }
 
-    public String getMetadata() {
-        return metadata;
+    public String getMetadataXml() {
+        return metadataXml;
     }
 
-    public void setMetadata(String metadata) {
-        this.metadata = metadata;
+    public void setMetadataXml(String metadataXml) {
+        this.metadataXml = metadataXml;
     }
 
     public BigDecimal getPrice() {

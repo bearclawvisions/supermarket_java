@@ -36,16 +36,11 @@ public class SeedData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        List<ProductCategory> categories = productCategoryRepository.findAll();
-
-        if (categories.isEmpty()) {
-            seedDatabase();
-        }
-
-        List<Product> products = productRepository.findAll();
-        if (products.isEmpty()) {
-            seedDatabase();
-        }
+//        List<ProductCategory> categories = productCategoryRepository.findAll();
+//
+//        if (categories.isEmpty()) {
+//            seedDatabase();
+//        }
     }
 
     public void seedDatabase() throws IOException, JAXBException, URISyntaxException {
@@ -64,10 +59,10 @@ public class SeedData implements CommandLineRunner {
         if (jsonData.has("products") && jsonData.has("categories")) {
 
             // Seed categories
-//            JsonNode categoriesElement = jsonData.get("categories");
-//            for (JsonNode categoryElement : categoriesElement) {
-//                seedCategory(categoryElement);
-//            }
+            JsonNode categoriesElement = jsonData.get("categories");
+            for (JsonNode categoryElement : categoriesElement) {
+                seedCategory(categoryElement);
+            }
 
             // Seed products
             JsonNode productsElement = jsonData.get("products");
@@ -108,19 +103,30 @@ public class SeedData implements CommandLineRunner {
         String metadataXml = createNutritionalValue(nutritionalValue, name, brand, description, priceKg, type, allergen, extraInfo);
 
         // Get category ID
-        int categoryId = productCategoryRepository.findByName(category).getId();
+        String capitalizedCategory = Character.toUpperCase(category.charAt(0)) + category.substring(1);
+        int categoryId = productCategoryRepository.findByName(capitalizedCategory).getId();
 
         Product product = new Product();
         product.setCategoryId(categoryId);
         product.setName(name);
-        product.setMetadata(metadataXml);
+        product.setMetadataXml(metadataXml);
         product.setPrice(priceKg);
         product.setQuantity(10);
         product.setStatus(ProductStatus.IN_STOCK);
         product.setExpiryDate(LocalDateTime.now().plusDays(30));
         product.setCreatedBy("System");
 
-        productRepository.save(product);
+        productRepository.insertProduct(
+                product.getCategoryId(),
+                product.getName(),
+                product.getMetadataXml(),
+                product.getPrice(),
+                product.getQuantity(),
+                product.getStatus(),
+                product.getExpiryDate(),
+                product.getCreatedBy(),
+                product.getCreatedOn()
+        );
     }
 
     private String createNutritionalValue(JsonNode nutritionalValue, String name, String brand, String description, BigDecimal priceKg, String type, String allergen, String extraInfo)
@@ -150,6 +156,6 @@ public class SeedData implements CommandLineRunner {
         metadata.setTags(new ArrayList<>());
         metadata.setExtraInfo(extraInfo);
 
-        return XmlUtils.toXml(metadata);
+        return XmlUtils.serializeToXml(metadata);
     }
 }

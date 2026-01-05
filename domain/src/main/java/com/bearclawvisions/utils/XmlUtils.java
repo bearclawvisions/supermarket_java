@@ -20,7 +20,7 @@ public class XmlUtils {
      * @return XML string representation
      * @throws JAXBException if serialization fails
      */
-    public static <T> String toXml(T obj, boolean omitXmlDeclaration, boolean indent) throws JAXBException {
+    public static <T> String serializeToXml(T obj, boolean omitXmlDeclaration, boolean indent) throws JAXBException {
         if (obj == null) {
             throw new IllegalArgumentException("Object cannot be null");
         }
@@ -51,8 +51,8 @@ public class XmlUtils {
      * @return XML string representation
      * @throws JAXBException if serialization fails
      */
-    public static <T> String toXml(T obj) throws JAXBException {
-        return toXml(obj, true, true);
+    public static <T> String serializeToXml(T obj) throws JAXBException {
+        return serializeToXml(obj, true, true);
     }
 
     /**
@@ -64,7 +64,7 @@ public class XmlUtils {
      * @return Deserialized object
      * @throws JAXBException if deserialization fails
      */
-    public static <T> T fromXml(String xmlString, Class<T> type) throws JAXBException {
+    public static <T> T deserializeToJava(String xmlString, Class<T> type) throws JAXBException {
         if (xmlString == null || xmlString.isBlank()) {
             throw new IllegalArgumentException("XML string cannot be null or empty");
         }
