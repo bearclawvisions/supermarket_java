@@ -42,6 +42,11 @@ public class DependencyConfig {
     }
 
     @Bean
+    public IProductService productService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, ISecurityContextService securityContextService) {
+        return new ProductService(productRepository, productCategoryRepository, securityContextService);
+    }
+
+    @Bean
     public UserDetailService userDetailService(UserRepository userRepository) {
         return new UserDetailService(userRepository);
     }

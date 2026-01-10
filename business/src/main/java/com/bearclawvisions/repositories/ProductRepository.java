@@ -6,16 +6,26 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
+@Repository
 public interface ProductRepository extends JpaRepository<Product, Integer> {
     Product findById(int id);
     Product findByCategoryId(int categoryId);
     Product findByName(String name);
     Product findByPrice(BigDecimal price);
+
+    List<Product> findAllByStatus(ProductStatus status);
+    List<Product> findAllByCategoryId(int categoryId);
+    List<Product> findAllByPriceGreaterThanEqualAndPriceLessThanEqual(BigDecimal minPrice, BigDecimal maxPrice);
+    List<Product> findAllByPriceGreaterThanEqual(BigDecimal minPrice);
+    List<Product> findAllByPriceLessThanEqual(BigDecimal maxPrice);
+    List<Product> findAllByExpiryDateGreaterThanEqual(LocalDateTime expiryDate);
 
     @Modifying // tell spring that this query modifies the database Insert, Update, Delete statements
     @Transactional // ensures proper transaction management
