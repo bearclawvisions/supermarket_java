@@ -1,6 +1,8 @@
 package com.bearclawvisions.api.middleware;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
 import com.bearclawvisions.api.helpers.JwtUtil;
+import com.bearclawvisions.services.implementations.CurrentUser;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -13,6 +15,7 @@ import org.springframework.util.StringUtils;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import java.io.IOException;
+import java.util.UUID;
 
 public class JwtAuthFilter extends OncePerRequestFilter {
 
@@ -29,11 +32,16 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             String jwt = extractJwtFromRequest(request);
 
             if (StringUtils.hasText(jwt)) {
-                String username = jwtUtil.validateTokenAndRetrieveSubject(jwt);
+                DecodedJWT decodedJWT = jwtUtil.getDecodedToken(jwt);
 
-                if (username != null) {
-                    UsernamePasswordAuthenticationToken authentication =
-                            new UsernamePasswordAuthenticationToken(username, null, null);
+                if (decodedJWT.getSubject() != null) {
+                    UUID userId = UUID.fromString(decodedJWT.getClaim("id").asString());
+                    String email = decodedJWT.getSubject();
+                    String role = decodedJWT.getClaim("role").asString();
+
+                    CurrentUser currentUser = new CurrentUser(userId, email, role);
+
+                    UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(currentUser, null, null);
                     authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
                     SecurityContextHolder.getContext().setAuthentication(authentication);
                 }
