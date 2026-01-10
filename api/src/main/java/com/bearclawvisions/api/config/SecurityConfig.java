@@ -47,7 +47,7 @@ public class SecurityConfig {
                 ).permitAll()
                 .anyRequest().authenticated()
             )
-            .userDetailsService(userDetailService)
+            .userDetailsService(userDetailService) // todo currently not actually being used?
             .exceptionHandling(exceptionHandling -> exceptionHandling
                     .authenticationEntryPoint((request, response, authException) ->
                             response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")))

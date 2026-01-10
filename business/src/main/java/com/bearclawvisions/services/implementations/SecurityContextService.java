@@ -35,6 +35,11 @@ public class SecurityContextService implements ISecurityContextService {
         }
     }
 
+    /**
+     * Retrieves the current user from the security context.
+     * @return The current user.
+     * @throws IllegalStateException If the user is not authenticated.
+     */
     private CurrentUser getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof CurrentUser)) {
