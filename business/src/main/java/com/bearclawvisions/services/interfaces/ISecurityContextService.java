@@ -8,4 +8,5 @@ public interface ISecurityContextService {
     UUID getCurrentUserId();
     String getCurrentUserEmail();
     ApplicationRole getCurrentUserRole();
+    void validateUserRole(ApplicationRole requiredRole) throws SecurityException;
 }

@@ -1,6 +1,7 @@
 package com.bearclawvisions.services.implementations;
 
 import com.bearclawvisions.entitities.Product;
+import com.bearclawvisions.enums.ApplicationRole;
 import com.bearclawvisions.repositories.ProductCategoryRepository;
 import com.bearclawvisions.repositories.ProductRepository;
 import com.bearclawvisions.services.interfaces.IProductService;
@@ -21,7 +22,21 @@ public class ProductService implements IProductService {
     @Override
     public Product getProductById(int id) {
         var result = securityContextService.getCurrentUserId();
+        var role = securityContextService.getCurrentUserRole();
+        var email = securityContextService.getCurrentUserEmail();
         // todo validate request
         return productRepository.findById(id);
+    }
+
+    @Override
+    public String getAdminProduct() {
+        securityContextService.validateUserRole(ApplicationRole.ADMIN);
+        return "Admin product details";
+    }
+
+    @Override
+    public String getCustomerProduct() {
+        securityContextService.validateUserRole(ApplicationRole.CUSTOMER);
+        return "Customer product details";
     }
 }

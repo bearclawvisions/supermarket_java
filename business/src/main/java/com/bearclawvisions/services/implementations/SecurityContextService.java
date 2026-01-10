@@ -27,6 +27,14 @@ public class SecurityContextService implements ISecurityContextService {
         return user.role();
     }
 
+    @Override
+    public void validateUserRole(ApplicationRole requiredRole) throws SecurityException {
+        ApplicationRole currentUserRole = getCurrentUserRole();
+        if (currentUserRole != requiredRole) {
+            throw new SecurityException("User role does not match required role");
+        }
+    }
+
     private CurrentUser getCurrentUser() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication == null || !(authentication.getPrincipal() instanceof CurrentUser)) {
