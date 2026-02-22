@@ -6,7 +6,9 @@ import com.bearclawvisions.repositories.ProductCategoryRepository;
 import com.bearclawvisions.repositories.ProductRepository;
 import com.bearclawvisions.services.interfaces.ProductService;
 import com.bearclawvisions.services.interfaces.SecurityContextService;
+import org.springframework.stereotype.Service;
 
+@Service
 public class DefaultProductService implements ProductService {
 
     private final ProductRepository productRepository;

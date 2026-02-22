@@ -4,9 +4,11 @@ import com.bearclawvisions.enums.ApplicationRole;
 import com.bearclawvisions.services.interfaces.SecurityContextService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 
 import java.util.UUID;
 
+@Service
 public class DefaultSecurityContextService implements SecurityContextService {
 
     @Override

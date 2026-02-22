@@ -32,7 +32,7 @@ public class SecurityConfig {
     }
 
     @Bean // sort of auto DI with spring, default scope is singleton
-    @Scope("singleton") // for some reason magic string? why not enum? has to be done manually, either create enum or custom Bean
+    @Scope("singleton") // scope in java defaults to singleton, not scoped per webrequest
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable) // c -> c.disable()
             .httpBasic(AbstractHttpConfigurer::disable) // h -> h.disable()
