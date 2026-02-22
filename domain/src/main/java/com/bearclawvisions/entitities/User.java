@@ -3,6 +3,8 @@ package com.bearclawvisions.entitities;
 import com.bearclawvisions.dto.user.RegisterDto;
 import com.bearclawvisions.enums.ApplicationRole;
 import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
 
 import java.time.LocalDate;
@@ -17,18 +19,20 @@ public class User {
     @GeneratedValue(strategy = GenerationType.UUID)
     private UUID id;
 
-    @Column(unique = true)
+    @NotNull // validation on application level
+    @NotBlank
+    @Column(unique = true) // validation on database level
     private String email;
 
     @Column(nullable = false)
     private String password;
 
-    @Size(max = 50)
-    @Column(nullable = false, name = "first_name")
+    @Size(max = 50) // validation on application level
+    @Column(nullable = false, name = "first_name", length = 50) // validation on database level
     private String firstName;
 
     @Size(max = 50)
-    @Column(nullable = false, name = "last_name")
+    @Column(nullable = false, name = "last_name", length = 50)
     private String lastName;
 
     @Column(name = "birth_date")
