@@ -33,3 +33,19 @@ The project is split into 3 modules:
 | [Annotation]                     | @Annotation (Bean)                             |
 | dotnet CLI / MSBuild             | Maven / Gradle / Other                         |
 ---
+
+# Optional<T> vs @Nullable
+Both types are similar to the nullable type annotation in C# (string?).  
+But java has different rules for handling null values.  
+`@Nullable String` = Absence is implicit. You discover it at runtime.  
+`Optional<String>` = Absence is explicit. The type system forces awareness.  
+
+## Usage guidelines
+| `Optional<String>` | `@Nullable String` |
+|--------------------|--------------------|
+| Wrapper object     | Raw reference      |
+| Explicit absence   | Implicit absence   |
+| Forces handling    | Easy to forget     |
+| Fluent API         | Manual null checks |
+| Slower             | Fast               |
+| For returns        | For params/fields  |
