@@ -7,20 +7,20 @@ import com.bearclawvisions.entitities.User;
 import com.bearclawvisions.enums.ApplicationRole;
 import com.bearclawvisions.exceptions.BusinessException;
 import com.bearclawvisions.repositories.UserRepository;
-import com.bearclawvisions.services.interfaces.IUserService;
+import com.bearclawvisions.services.interfaces.UserService;
 import org.jspecify.annotations.NonNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
 import java.util.UUID;
 
-public class UserService implements IUserService {
+public class DefaultUserService implements UserService {
 
     private final UserRepository userRepository;
 
     private final PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
 
-    public UserService(UserRepository userRepository) {
+    public DefaultUserService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

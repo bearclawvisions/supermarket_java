@@ -4,7 +4,7 @@ import com.bearclawvisions.enums.ApplicationRole;
 
 import java.util.UUID;
 
-public interface ISecurityContextService {
+public interface SecurityContextService {
     UUID getCurrentUserId();
     String getCurrentUserEmail();
     ApplicationRole getCurrentUserRole();

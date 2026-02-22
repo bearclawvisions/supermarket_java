@@ -4,16 +4,16 @@ import com.bearclawvisions.entitities.Product;
 import com.bearclawvisions.enums.ApplicationRole;
 import com.bearclawvisions.repositories.ProductCategoryRepository;
 import com.bearclawvisions.repositories.ProductRepository;
-import com.bearclawvisions.services.interfaces.IProductService;
-import com.bearclawvisions.services.interfaces.ISecurityContextService;
+import com.bearclawvisions.services.interfaces.ProductService;
+import com.bearclawvisions.services.interfaces.SecurityContextService;
 
-public class ProductService implements IProductService {
+public class DefaultProductService implements ProductService {
 
     private final ProductRepository productRepository;
     private final ProductCategoryRepository productCategoryRepository;
-    private final ISecurityContextService securityContextService;
+    private final SecurityContextService securityContextService;
 
-    public ProductService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, ISecurityContextService securityContextService) {
+    public DefaultProductService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, SecurityContextService securityContextService) {
         this.productRepository = productRepository;
         this.productCategoryRepository = productCategoryRepository;
         this.securityContextService = securityContextService;

@@ -3,13 +3,13 @@ package com.bearclawvisions.api.config;
 import com.bearclawvisions.repositories.ProductCategoryRepository;
 import com.bearclawvisions.repositories.ProductRepository;
 import com.bearclawvisions.repositories.UserRepository;
-import com.bearclawvisions.services.implementations.ProductService;
-import com.bearclawvisions.services.implementations.SecurityContextService;
+import com.bearclawvisions.services.implementations.DefaultProductService;
+import com.bearclawvisions.services.implementations.DefaultSecurityContextService;
 import com.bearclawvisions.services.implementations.UserDetailService;
-import com.bearclawvisions.services.implementations.UserService;
-import com.bearclawvisions.services.interfaces.IProductService;
-import com.bearclawvisions.services.interfaces.ISecurityContextService;
-import com.bearclawvisions.services.interfaces.IUserService;
+import com.bearclawvisions.services.implementations.DefaultUserService;
+import com.bearclawvisions.services.interfaces.ProductService;
+import com.bearclawvisions.services.interfaces.SecurityContextService;
+import com.bearclawvisions.services.interfaces.UserService;
 import org.springframework.boot.persistence.autoconfigure.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -32,18 +32,18 @@ public class DependencyConfig {
 
     // services
     @Bean
-    public ISecurityContextService securityContextService() {
-        return new SecurityContextService();
+    public SecurityContextService securityContextService() {
+        return new DefaultSecurityContextService();
     }
 
     @Bean
-    public IUserService userService(UserRepository userRepository) {
-        return new UserService(userRepository);
+    public UserService userService(UserRepository userRepository) {
+        return new DefaultUserService(userRepository);
     }
 
     @Bean
-    public IProductService productService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, ISecurityContextService securityContextService) {
-        return new ProductService(productRepository, productCategoryRepository, securityContextService);
+    public ProductService productService(ProductRepository productRepository, ProductCategoryRepository productCategoryRepository, SecurityContextService securityContextService) {
+        return new DefaultProductService(productRepository, productCategoryRepository, securityContextService);
     }
 
     @Bean

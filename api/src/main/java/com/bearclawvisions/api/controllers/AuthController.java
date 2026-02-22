@@ -7,7 +7,7 @@ import com.bearclawvisions.dto.user.JwtAuthResponseDto;
 import com.bearclawvisions.dto.user.LoginDto;
 import com.bearclawvisions.dto.user.RegisterDto;
 import com.bearclawvisions.dto.user.UserDto;
-import com.bearclawvisions.services.interfaces.IUserService;
+import com.bearclawvisions.services.interfaces.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -19,10 +19,10 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/auth", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class AuthController {
 
-    private final IUserService userService;
+    private final UserService userService;
     private final JwtUtil jwtUtil;
 
-    public AuthController(IUserService userService, JwtUtil jwtUtil) {
+    public AuthController(UserService userService, JwtUtil jwtUtil) {
         this.userService = userService;
         this.jwtUtil = jwtUtil;
     }

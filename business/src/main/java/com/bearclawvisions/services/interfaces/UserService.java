@@ -5,7 +5,7 @@ import com.bearclawvisions.dto.user.RegisterDto;
 import com.bearclawvisions.dto.user.UserDto;
 import org.jspecify.annotations.NonNull;
 
-public interface IUserService {
+public interface UserService {
     UserDto getTestUser();
     String createUser(RegisterDto userDto);
     UserDto loginUser(@NonNull LoginDto loginDto);

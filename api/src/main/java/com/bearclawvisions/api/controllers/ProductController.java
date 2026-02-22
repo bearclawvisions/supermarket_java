@@ -3,7 +3,7 @@ package com.bearclawvisions.api.controllers;
 import com.bearclawvisions.api.contracts.ApiResponse;
 import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.entitities.Product;
-import com.bearclawvisions.services.interfaces.IProductService;
+import com.bearclawvisions.services.interfaces.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,9 +15,9 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping(value = "/products", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class ProductController {
 
-    private final IProductService productService;
+    private final ProductService productService;
 
-    public ProductController(IProductService productService) {
+    public ProductController(ProductService productService) {
         this.productService = productService;
     }
 

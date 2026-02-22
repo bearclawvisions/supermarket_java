@@ -1,13 +1,13 @@
 package com.bearclawvisions.services.implementations;
 
 import com.bearclawvisions.enums.ApplicationRole;
-import com.bearclawvisions.services.interfaces.ISecurityContextService;
+import com.bearclawvisions.services.interfaces.SecurityContextService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.util.UUID;
 
-public class SecurityContextService implements ISecurityContextService {
+public class DefaultSecurityContextService implements SecurityContextService {
 
     @Override
     public UUID getCurrentUserId() {

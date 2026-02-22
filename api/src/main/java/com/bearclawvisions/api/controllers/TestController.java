@@ -3,7 +3,7 @@ package com.bearclawvisions.api.controllers;
 import com.bearclawvisions.api.contracts.ApiResponse;
 import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.dto.user.UserDto;
-import com.bearclawvisions.services.interfaces.IUserService;
+import com.bearclawvisions.services.interfaces.UserService;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
@@ -17,9 +17,9 @@ public class TestController { // java has no [AllowAnonymous] like C#
     // due to spring security controller is protected by default
     // set [AllowAnonymous] in config which is .permitAll() in Spring Security configuration
 
-    private final IUserService userService; // could also be automagically @Autowired
+    private final UserService userService; // could also be automagically @Autowired
 
-    public TestController(IUserService userService) {
+    public TestController(UserService userService) {
         this.userService = userService;
     }
 
