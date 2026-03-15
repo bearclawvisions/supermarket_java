@@ -2,8 +2,8 @@ package com.bearclawvisions.services.implementations;
 
 import com.bearclawvisions.entitities.Product;
 import com.bearclawvisions.enums.ApplicationRole;
-import com.bearclawvisions.repositories.ProductCategoryRepository;
-import com.bearclawvisions.repositories.ProductRepository;
+import com.bearclawvisions.ports.ProductCategoryRepository;
+import com.bearclawvisions.ports.ProductRepository;
 import com.bearclawvisions.services.interfaces.ProductService;
 import com.bearclawvisions.services.interfaces.SecurityContextService;
 import org.springframework.stereotype.Service;
@@ -27,6 +27,9 @@ public class DefaultProductService implements ProductService {
         var role = securityContextService.getCurrentUserRole();
         var email = securityContextService.getCurrentUserEmail();
         // todo validate request
+
+        // map result to dto and convert xml to a model
+
         return productRepository.findById(id);
     }
 

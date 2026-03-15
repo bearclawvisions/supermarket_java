@@ -5,8 +5,8 @@ import com.bearclawvisions.dto.models.ProductMetadata;
 import com.bearclawvisions.entitities.Product;
 import com.bearclawvisions.entitities.ProductCategory;
 import com.bearclawvisions.enums.ProductStatus;
-import com.bearclawvisions.repositories.ProductCategoryRepository;
-import com.bearclawvisions.repositories.ProductRepository;
+import com.bearclawvisions.ports.ProductCategoryRepository;
+import com.bearclawvisions.ports.ProductRepository;
 import com.bearclawvisions.utils.XmlUtils;
 import jakarta.xml.bind.JAXBException;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -104,7 +104,9 @@ public class SeedData implements CommandLineRunner {
 
         // Get category ID
         String capitalizedCategory = Character.toUpperCase(category.charAt(0)) + category.substring(1);
-        int categoryId = productCategoryRepository.findByName(capitalizedCategory).getId();
+        int categoryId = productCategoryRepository.findByName(capitalizedCategory).orElseThrow().getId();
+
+        // todo exception handling of categoryId
 
         Product product = new Product();
         product.setCategoryId(categoryId);

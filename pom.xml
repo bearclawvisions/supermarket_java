@@ -20,6 +20,7 @@
     <module>domain</module>
     <module>business</module>
     <module>api</module>
+    <module>persistence</module>
   </modules>
 
   <properties>
@@ -40,6 +41,11 @@
       <dependency>
         <groupId>com.bearclawvisions</groupId>
         <artifactId>domain</artifactId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <groupId>com.bearclawvisions</groupId>
+        <artifactId>persistence</artifactId>
         <version>${project.version}</version>
       </dependency>
 

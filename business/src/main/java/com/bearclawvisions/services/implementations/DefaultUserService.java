@@ -6,7 +6,7 @@ import com.bearclawvisions.dto.user.UserDto;
 import com.bearclawvisions.entitities.User;
 import com.bearclawvisions.enums.ApplicationRole;
 import com.bearclawvisions.exceptions.BusinessException;
-import com.bearclawvisions.repositories.UserRepository;
+import com.bearclawvisions.ports.UserRepository;
 import com.bearclawvisions.services.interfaces.UserService;
 import org.jspecify.annotations.NonNull;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

@@ -19,6 +19,7 @@
 
   <dependencies>
 
+    <!--module dependencies-->
     <dependency>
       <groupId>com.bearclawvisions</groupId>
       <artifactId>business</artifactId>
@@ -26,6 +27,10 @@
     <dependency>
       <groupId>com.bearclawvisions</groupId>
       <artifactId>domain</artifactId>
+    </dependency>
+    <dependency>
+      <groupId>com.bearclawvisions</groupId>
+      <artifactId>persistence</artifactId>
     </dependency>
 
     <dependency>

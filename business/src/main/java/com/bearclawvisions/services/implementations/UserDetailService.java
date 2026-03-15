@@ -1,7 +1,7 @@
 package com.bearclawvisions.services.implementations;
 
 import com.bearclawvisions.entitities.User;
-import com.bearclawvisions.repositories.UserRepository;
+import com.bearclawvisions.ports.UserRepository;
 import org.jspecify.annotations.NonNull;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
