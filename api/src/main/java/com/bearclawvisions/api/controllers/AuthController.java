@@ -43,12 +43,7 @@ public class AuthController {
                 user.getRole().toString()
         );
 
-        JwtAuthResponseDto authResponse = new JwtAuthResponseDto(
-                token,
-                user.getEmail(),
-                user.getId(),
-                user.getRole()
-        );
+        JwtAuthResponseDto authResponse = new JwtAuthResponseDto(token);
 
         return ApiResponseBuilder.success(authResponse);
     }

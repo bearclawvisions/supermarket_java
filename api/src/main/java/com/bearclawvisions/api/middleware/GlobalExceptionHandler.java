@@ -5,6 +5,7 @@ import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.exceptions.BusinessException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.authorization.AuthorizationDeniedException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
@@ -21,6 +22,11 @@ public class GlobalExceptionHandler {
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<String>> handleGenericException(Exception e) {
         return ApiResponseBuilder.error(HttpStatus.BAD_REQUEST, "Internal Server Error", List.of(e.getMessage()));
+    }
+
+    @ExceptionHandler(AuthorizationDeniedException.class)
+    public ResponseEntity<ApiResponse<String>> handleSpringAuthorizationDeniedException(AuthorizationDeniedException e) {
+        return ApiResponseBuilder.error(HttpStatus.UNAUTHORIZED, "Unauthorized", List.of(e.getMessage()));
     }
 
     @ExceptionHandler(SecurityException.class)

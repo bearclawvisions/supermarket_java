@@ -1,6 +1,7 @@
 package com.bearclawvisions.api.controllers;
 
 import com.bearclawvisions.api.annotations.IsAdmin;
+import com.bearclawvisions.api.annotations.IsCustomer;
 import com.bearclawvisions.api.contracts.ApiResponse;
 import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.entitities.Product;
@@ -34,6 +35,7 @@ public class ProductController {
         return ApiResponseBuilder.success(productService.getAdminProduct());
     }
 
+    @IsCustomer
     @GetMapping("/customerget")
     public ResponseEntity<ApiResponse<String>> getCustomerProduct() {
         return ApiResponseBuilder.success(productService.getCustomerProduct());
