@@ -24,7 +24,6 @@
     <dependency>
       <groupId>com.bearclawvisions</groupId>
       <artifactId>domain</artifactId>
-      <scope>compile</scope>
     </dependency>
     <dependency>
       <groupId>com.bearclawvisions</groupId>

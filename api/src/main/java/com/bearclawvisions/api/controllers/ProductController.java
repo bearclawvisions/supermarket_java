@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping(value = "/products", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
+@IsAdmin
 public class ProductController {
 
     private final ProductService productService;
@@ -28,7 +29,7 @@ public class ProductController {
         return ApiResponseBuilder.success(productService.getProductById(id));
     }
 
-    @IsAdmin
+    @IsAdmin // can be applied to controller level as well, just like C#
     @GetMapping("/adminget")
     //@PreAuthorize("hasRole(T(com.bearclawvisions.enums.ApplicationRole).ADMIN.name())") // this still uses magic strings. enums are not compile time constants in java. validate in service layer
     public ResponseEntity<ApiResponse<String>> getAdminProduct() {
