@@ -1,5 +1,6 @@
 package com.bearclawvisions.api.controllers;
 
+import com.bearclawvisions.api.annotations.IsAdmin;
 import com.bearclawvisions.api.contracts.ApiResponse;
 import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.entitities.Product;
@@ -26,6 +27,7 @@ public class ProductController {
         return ApiResponseBuilder.success(productService.getProductById(id));
     }
 
+    @IsAdmin
     @GetMapping("/adminget")
     //@PreAuthorize("hasRole(T(com.bearclawvisions.enums.ApplicationRole).ADMIN.name())") // this still uses magic strings. enums are not compile time constants in java. validate in service layer
     public ResponseEntity<ApiResponse<String>> getAdminProduct() {

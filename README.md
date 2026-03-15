@@ -11,10 +11,14 @@ Similarities and differences between Java and C# for a .NET developer.
 Given that this is a small project, where the idea is to have a clean architecture without overengineering.
 The frontend is a simple Vue.js app which is a copy from the frontend used in a C# project.
 This project uses Maven as a build tool. There is a parent pom.xml file which contains the common configuration for all modules as well as the dependency management.
-The project is split into 3 modules:
+The project is split into 4 modules:
 - core
 - domain
 - infrastructure
+- persistence
+
+In C# this is more like a layered Clean Architecture, but in Java this would be called Hexagonal Architecture.  
+
 ---
 
 # Technical terms
@@ -49,3 +53,12 @@ But java has different rules for handling null values.
 | Fluent API         | Manual null checks |
 | Slower             | Fast               |
 | For returns        | For params/fields  |
+
+
+# Enums
+Enums in Java are fundamentally different from C#. In C# enums are like a named integer type.  
+In Java enums are more like a class with static final fields. They can have methods and constructors.  
+This allows for more complex behavior and state management within enums.  
+
+In Java enums are not compile time constants, like in C#. They are runtime constants. This means that you need a workaround to get compile time constants.  
+Duplication is inevitable, e.g. a role enum class can be used in the whole application, but to use the name as a constant you need to duplicate it to static final fields.  
