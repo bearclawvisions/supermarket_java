@@ -27,6 +27,15 @@
     <maven.compiler.source>25</maven.compiler.source>
     <maven.compiler.target>25</maven.compiler.target>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <!--versions-->
+    <springdoc.version>3.0.2</springdoc.version>
+    <logbook.version>4.0.3</logbook.version>
+    <logstash.version>9.0</logstash.version>
+    <jakarta.validation.version>3.1.1</jakarta.validation.version>
+    <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
+    <java-jwt.version>4.5.1</java-jwt.version>
+    <junit.version>6.0.1</junit.version>
   </properties>
 
   <dependencyManagement>
@@ -50,53 +59,46 @@
       </dependency>
 
       <!-- Other dependencies -->
-      <!--Configure probes for kubernetes-->
-      <dependency>
-        <groupId>org.springframework.boot</groupId>
-        <artifactId>spring-boot-starter-actuator</artifactId>
-        <version>4.0.4</version>
-      </dependency>
-
       <!--Configure logging with logbook and logstash-->
       <dependency>
         <groupId>org.zalando</groupId>
         <artifactId>logbook-spring-boot-starter</artifactId>
-        <version>4.0.3</version>
+        <version>${logbook.version}</version>
       </dependency>
       <dependency>
         <groupId>org.zalando</groupId>
         <artifactId>logbook-logstash</artifactId>
-        <version>4.0.3</version>
+        <version>${logbook.version}</version>
       </dependency>
       <dependency>
         <groupId>net.logstash.logback</groupId>
         <artifactId>logstash-logback-encoder</artifactId>
-        <version>9.0</version>
+        <version>${logstash.version}</version>
       </dependency>
 
       <dependency>
         <groupId>jakarta.validation</groupId>
         <artifactId>jakarta.validation-api</artifactId>
-        <version>3.1.1</version>
+        <version>${jakarta.validation.version}</version>
       </dependency>
       <dependency>
         <groupId>jakarta.persistence</groupId>
         <artifactId>jakarta.persistence-api</artifactId>
-        <version>3.2.0</version>
+        <version>${jakarta.persistence.version}</version>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
       <dependency>
         <groupId>com.auth0</groupId>
         <artifactId>java-jwt</artifactId>
-        <version>4.5.1</version>
+        <version>${java-jwt.version}</version>
       </dependency>
 
       <!-- https://mvnrepository.com/artifact/org.springdoc/springdoc-openapi-starter-webmvc-ui -->
       <dependency>
         <groupId>org.springdoc</groupId>
         <artifactId>springdoc-openapi-starter-webmvc-ui</artifactId>
-        <version>3.0.2</version>
+        <version>${springdoc.version}</version>
       </dependency>
 
       <!-- Testing -->
@@ -104,7 +106,7 @@
       <dependency>
         <groupId>org.junit.jupiter</groupId>
         <artifactId>junit-jupiter-api</artifactId>
-        <version>6.0.1</version>
+        <version>${junit.version}</version>
         <scope>test</scope>
       </dependency>
     </dependencies>
