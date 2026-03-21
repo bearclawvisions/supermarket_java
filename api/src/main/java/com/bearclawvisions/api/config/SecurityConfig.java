@@ -4,9 +4,10 @@ import com.bearclawvisions.api.helpers.JwtUtil;
 import com.bearclawvisions.api.middleware.JwtAuthFilter;
 import com.bearclawvisions.services.implementations.UserDetailService;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.boot.security.autoconfigure.actuate.web.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Scope;
+import org.springframework.core.annotation.Order;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -33,8 +34,21 @@ public class SecurityConfig {
         this.jwtUtil = jwtUtil;
     }
 
-    @Bean // sort of auto DI with spring, default scope is singleton
-    @Scope("singleton") // scope in java defaults to singleton, not scoped per webrequest
+
+    @Bean
+    @Order(1)
+    public SecurityFilterChain actuatorFilterChain(HttpSecurity http) throws Exception {
+        http.securityMatcher(EndpointRequest.toAnyEndpoint())
+                .authorizeHttpRequests(request -> request
+                        .anyRequest().permitAll()
+                );
+
+        return http.build();
+    }
+
+    @Bean
+//    @Scope("singleton") // scope in java defaults to singleton, not scoped per webrequest
+    @Order(2)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable) // c -> c.disable()
             .httpBasic(AbstractHttpConfigurer::disable) // h -> h.disable()

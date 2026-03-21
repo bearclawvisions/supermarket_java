@@ -17,6 +17,13 @@ spring:
     password: "${DB_PASSWORD}"
   devtools:
     add-properties: "true"
+  threads:
+    virtual:
+      enabled: "true" # currently provides no performance gain
+  api-docs:
+    enabled: "true"
+  swagger-ui:
+    enabled: "true"
 
 server:
   servlet:
