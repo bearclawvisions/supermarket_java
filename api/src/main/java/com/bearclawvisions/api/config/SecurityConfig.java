@@ -38,7 +38,7 @@ public class SecurityConfig {
     @Bean
     @Order(1)
     public SecurityFilterChain actuatorFilterChain(HttpSecurity http) throws Exception {
-        http.securityMatcher(EndpointRequest.toAnyEndpoint())
+        http.securityMatcher(EndpointRequest.toAnyEndpoint()) // specific to actuator endpoints, comes from package
                 .authorizeHttpRequests(request -> request
                         .anyRequest().permitAll()
                 );

@@ -25,10 +25,25 @@ spring:
   swagger-ui:
     enabled: "true"
 
+management:
+  health:
+    readinessstate:
+      enabled: "true"
+    livenessstate:
+      enabled: "true"
+  endpoints:
+    health:
+      probes:
+        enabled: "true"
+
 server:
   servlet:
     context-path: "/api" # set base path for api
 
 logging:
   level:
-    web: "DEBUG"
+    com:
+      bearclawvisions: "DEBUG"
+    org:
+      zalando:
+        logbook: "TRACE"
