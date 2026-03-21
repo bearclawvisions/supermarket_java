@@ -84,4 +84,8 @@ public class ProductRepositoryAdapter implements ProductRepository {
         return jpaProductRepository.save(product);
     }
 
+    @Override
+    public void deleteById(int id) {
+        jpaProductRepository.deleteById(id);
+    }
 }

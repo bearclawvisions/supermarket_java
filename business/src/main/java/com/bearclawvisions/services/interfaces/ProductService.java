@@ -9,4 +9,5 @@ public interface ProductService {
     String getAdminProduct();
     String getCustomerProduct();
     List<Product> getAllProducts();
+    void deleteProductById(int id);
 }

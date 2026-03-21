@@ -8,10 +8,7 @@ import com.bearclawvisions.entitities.Product;
 import com.bearclawvisions.services.interfaces.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,15 +16,29 @@ import java.util.List;
 @RequestMapping(value = "/products", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class ProductController {
 
+    private static final String PRODUCT_ID = "/{id}";
+
     private final ProductService productService;
 
     public ProductController(ProductService productService) {
         this.productService = productService;
     }
 
-    @GetMapping("/{id}")
+    @IsAdmin
+    @GetMapping() // index
+    public ResponseEntity<ApiResponse<List<Product>>> getAllProduct() {
+        return ApiResponseBuilder.success(productService.getAllProducts());
+    }
+
+    @GetMapping(PRODUCT_ID)
     public ResponseEntity<ApiResponse<Product>> getProductById(@PathVariable int id) {
         return ApiResponseBuilder.success(productService.getProductById(id));
+    }
+
+    @DeleteMapping(PRODUCT_ID)
+    public ResponseEntity<ApiResponse<String>> deleteProductById(@PathVariable int id) {
+        productService.deleteProductById(id);
+        return ApiResponseBuilder.success("Product deleted successfully");
     }
 
     @IsAdmin // can be applied to controller level as well, just like C#
@@ -40,11 +51,5 @@ public class ProductController {
     @GetMapping("/customerget")
     public ResponseEntity<ApiResponse<String>> getCustomerProduct() {
         return ApiResponseBuilder.success(productService.getCustomerProduct());
-    }
-
-    @IsAdmin
-    @GetMapping("/")
-    public ResponseEntity<ApiResponse<List<Product>>> getAllProduct() {
-        return ApiResponseBuilder.success(productService.getAllProducts());
     }
 }

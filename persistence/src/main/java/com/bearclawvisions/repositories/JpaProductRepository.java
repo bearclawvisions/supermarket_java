@@ -62,4 +62,6 @@ public interface JpaProductRepository extends JpaRepository<Product, Integer> {
             @Param("createdBy") String createdBy,
             @Param("createdOn") LocalDateTime createdOn
     );
+
+    void deleteById(int id);
 }
