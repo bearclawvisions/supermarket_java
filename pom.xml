@@ -50,14 +50,22 @@
       </dependency>
 
       <!-- Other dependencies -->
+      <!--Configure probes for kubernetes-->
       <dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-actuator</artifactId>
         <version>4.0.1</version>
       </dependency>
+
+      <!--Configure logging with logbook and logstash-->
       <dependency>
         <groupId>org.zalando</groupId>
         <artifactId>logbook-spring-boot-starter</artifactId>
+        <version>4.0.3</version>
+      </dependency>
+      <dependency>
+        <groupId>org.zalando</groupId>
+        <artifactId>logbook-logstash</artifactId>
         <version>4.0.3</version>
       </dependency>
       <dependency>
@@ -76,6 +84,7 @@
         <artifactId>jakarta.persistence-api</artifactId>
         <version>3.2.0</version>
       </dependency>
+
       <!-- https://mvnrepository.com/artifact/com.auth0/java-jwt -->
       <dependency>
         <groupId>com.auth0</groupId>
