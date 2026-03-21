@@ -12,6 +12,7 @@ public interface ProductRepository {
     Product findByCategoryId(int categoryId);
     Product findByName(String name);
     Product findByPrice(BigDecimal price);
+    List<Product> findAll();
 
     List<Product> findAllByStatus(ProductStatus status);
     List<Product> findAllByCategoryId(int categoryId);

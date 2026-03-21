@@ -40,6 +40,11 @@ public class ProductRepositoryAdapter implements ProductRepository {
     }
 
     @Override
+    public List<Product> findAll() {
+        return jpaProductRepository.findAll();
+    }
+
+    @Override
     public List<Product> findAllByStatus(ProductStatus status) {
         return jpaProductRepository.findAllByStatus(status);
     }

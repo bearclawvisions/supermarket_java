@@ -6,7 +6,10 @@ import com.bearclawvisions.ports.ProductCategoryRepository;
 import com.bearclawvisions.ports.ProductRepository;
 import com.bearclawvisions.services.interfaces.ProductService;
 import com.bearclawvisions.services.interfaces.SecurityContextService;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class DefaultProductService implements ProductService {
@@ -19,6 +22,12 @@ public class DefaultProductService implements ProductService {
         this.productRepository = productRepository;
         this.productCategoryRepository = productCategoryRepository;
         this.securityContextService = securityContextService;
+    }
+
+    @Cacheable(cacheNames = "supermarketCache", key = "'allProducts'")
+    @Override
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
     }
 
     @Override

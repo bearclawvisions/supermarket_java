@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.List;
+
 @RestController
 @RequestMapping(value = "/products", produces = MimeTypeUtils.APPLICATION_JSON_VALUE)
 public class ProductController {
@@ -38,5 +40,11 @@ public class ProductController {
     @GetMapping("/customerget")
     public ResponseEntity<ApiResponse<String>> getCustomerProduct() {
         return ApiResponseBuilder.success(productService.getCustomerProduct());
+    }
+
+    @IsAdmin
+    @GetMapping("/")
+    public ResponseEntity<ApiResponse<List<Product>>> getAllProduct() {
+        return ApiResponseBuilder.success(productService.getAllProducts());
     }
 }
