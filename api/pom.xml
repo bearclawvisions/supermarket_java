@@ -15,6 +15,9 @@
 
   <properties>
     <java.version>25</java.version>
+
+    <!-- Enable build-image only for this module -->
+    <skip.build-image>false</skip.build-image>
   </properties>
 
   <dependencies>
@@ -118,9 +121,21 @@
       <plugin>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-maven-plugin</artifactId>
-
+        <!--for containerizing info see-->
+        <!--https://docs.spring.io/spring-boot/maven-plugin/build-image.html-->
         <executions>
 
+          <!--build an image with:-->
+          <!--mvn clean package spring-boot:build-image-->
+
+          <!--run with:-->
+          <!--docker container run -d -p 8080:8080 &#45;&#45;name SupermarketJava &#45;&#45;env-file .env api:1.0-SNAPSHOT-->
+          <execution>
+            <id>build-image</id>
+            <goals>
+              <goal>build-image</goal>
+            </goals>
+          </execution>
           <execution>
             <id>build-info</id>
             <goals>

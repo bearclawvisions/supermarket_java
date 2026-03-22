@@ -36,6 +36,9 @@
     <jakarta.persistence.version>3.2.0</jakarta.persistence.version>
     <java-jwt.version>4.5.1</java-jwt.version>
     <junit.version>6.0.1</junit.version>
+
+    <!-- Skip build-image goal by default -->
+    <skip.build-image>true</skip.build-image>
   </properties>
 
   <dependencyManagement>
@@ -111,5 +114,20 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.springframework.boot</groupId>
+          <artifactId>spring-boot-maven-plugin</artifactId>
+          <version>${parent.version}</version>
+          <configuration>
+            <skip>${skip.build-image}</skip>
+          </configuration>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
 </project>

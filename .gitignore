@@ -38,5 +38,6 @@ build/
 
 .env
 .env.local
+.env.docker
 
 data.json
