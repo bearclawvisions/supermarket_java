@@ -4,6 +4,8 @@ import com.bearclawvisions.entitities.Product;
 import com.bearclawvisions.enums.ProductStatus;
 import com.bearclawvisions.ports.ProductRepository;
 import com.bearclawvisions.repositories.JpaProductRepository;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Repository;
 
 import java.math.BigDecimal;
@@ -42,6 +44,12 @@ public class ProductRepositoryAdapter implements ProductRepository {
     @Override
     public List<Product> findAll() {
         return jpaProductRepository.findAll();
+    }
+
+    @Override
+    public List<Product> findAllPaged(int page, int pageSize) {
+        Pageable pageable = PageRequest.of(page, pageSize);
+        return jpaProductRepository.findAll(pageable).getContent();
     }
 
     @Override

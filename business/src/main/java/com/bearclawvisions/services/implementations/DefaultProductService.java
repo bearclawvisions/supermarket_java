@@ -43,6 +43,14 @@ public class DefaultProductService implements ProductService {
                 .collect(Collectors.toList());
     }
 
+    @Override
+    public List<ProductDto> getAllProductsByPage(int page, int pageSize) {
+        List<Product> allProducts = productRepository.findAllPaged(page, pageSize);
+        return allProducts.stream()
+                .map(ProductDto::toDto)
+                .collect(Collectors.toList());
+    }
+
     // CacheEvict like in the same class is not working. It works if it was in a different class.
     //@CacheEvict(cacheNames = "supermarketCache", key = "'allProducts'")
     @Override

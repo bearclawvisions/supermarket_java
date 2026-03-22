@@ -25,8 +25,15 @@ public class ProductController {
 
     @IsAdmin
     @GetMapping() // index
-    public ResponseEntity<ApiResponse<List<ProductDto>>> getAllProduct() {
+    public ResponseEntity<ApiResponse<List<ProductDto>>> getAllProducts() {
         return ApiResponseBuilder.success(productService.getAllProducts());
+    }
+
+    @GetMapping("/paged")
+    public ResponseEntity<ApiResponse<List<ProductDto>>> getAllProductsPaged(
+            @RequestParam(defaultValue = "0") int page,
+            @RequestParam(defaultValue = "10") int pageSize) {
+        return ApiResponseBuilder.success(productService.getAllProductsByPage(page, pageSize));
     }
 
     @GetMapping(PRODUCT_ID)
