@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface ProductService {
     ProductDto getProductById(int id);
-    String getAdminProduct();
-    String getCustomerProduct();
+//    String getAdminProduct();
+//    String getCustomerProduct();
     List<ProductDto> getAllProducts();
     void deleteProductById(int id);
 }

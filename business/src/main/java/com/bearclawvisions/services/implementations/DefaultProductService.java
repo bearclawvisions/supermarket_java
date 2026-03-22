@@ -2,11 +2,11 @@ package com.bearclawvisions.services.implementations;
 
 import com.bearclawvisions.dto.product.ProductDto;
 import com.bearclawvisions.entitities.Product;
-import com.bearclawvisions.enums.ApplicationRole;
 import com.bearclawvisions.ports.ProductCategoryRepository;
 import com.bearclawvisions.ports.ProductRepository;
 import com.bearclawvisions.services.interfaces.ProductService;
 import com.bearclawvisions.services.interfaces.SecurityContextService;
+import org.springframework.cache.Cache;
 import org.springframework.cache.CacheManager;
 import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
@@ -22,6 +22,8 @@ public class DefaultProductService implements ProductService {
     private final SecurityContextService securityContextService;
     private final CacheManager cacheManager;
 
+    private final String SUPERMARKET_CACHE = "supermarketCache";
+
     public DefaultProductService(ProductRepository productRepository,
                                  ProductCategoryRepository productCategoryRepository,
                                  SecurityContextService securityContextService,
@@ -32,7 +34,7 @@ public class DefaultProductService implements ProductService {
         this.cacheManager = cacheManager;
     }
 
-    @Cacheable(cacheNames = "supermarketCache", key = "'allProducts'")
+    @Cacheable(cacheNames = SUPERMARKET_CACHE, key = "'allProducts'")
     @Override
     public List<ProductDto> getAllProducts() {
         List<Product> allProducts = productRepository.findAll();
@@ -45,7 +47,10 @@ public class DefaultProductService implements ProductService {
     //@CacheEvict(cacheNames = "supermarketCache", key = "'allProducts'")
     @Override
     public void deleteProductById(int id) {
-        cacheManager.getCache("supermarketCache").clear(); // work around to clear cache
+        Cache cache = cacheManager.getCache(SUPERMARKET_CACHE);
+        if (cache != null) {
+            cache.clear(); // work around to clear cache
+        }
 
         productRepository.deleteById(id);
     }
@@ -63,15 +68,16 @@ public class DefaultProductService implements ProductService {
         return productDto;
     }
 
-    @Override
-    public String getAdminProduct() {
-        securityContextService.validateUserRole(ApplicationRole.ADMIN);
-        return "Admin product details";
-    }
-
-    @Override
-    public String getCustomerProduct() {
-        securityContextService.validateUserRole(ApplicationRole.CUSTOMER);
-        return "Customer product details";
-    }
+    // endpoints already secured by spring security. Logic wont enter here
+//    @Override
+//    public String getAdminProduct() {
+//        securityContextService.validateUserRole(ApplicationRole.ADMIN);
+//        return "Admin product details";
+//    }
+//
+//    @Override
+//    public String getCustomerProduct() {
+//        securityContextService.validateUserRole(ApplicationRole.CUSTOMER);
+//        return "Customer product details";
+//    }
 }
