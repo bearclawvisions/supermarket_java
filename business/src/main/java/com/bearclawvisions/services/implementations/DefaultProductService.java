@@ -1,5 +1,6 @@
 package com.bearclawvisions.services.implementations;
 
+import com.bearclawvisions.dto.product.ProductDto;
 import com.bearclawvisions.entitities.Product;
 import com.bearclawvisions.enums.ApplicationRole;
 import com.bearclawvisions.ports.ProductCategoryRepository;
@@ -11,6 +12,7 @@ import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class DefaultProductService implements ProductService {
@@ -32,8 +34,11 @@ public class DefaultProductService implements ProductService {
 
     @Cacheable(cacheNames = "supermarketCache", key = "'allProducts'")
     @Override
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
+    public List<ProductDto> getAllProducts() {
+        List<Product> allProducts = productRepository.findAll();
+        return allProducts.stream()
+                .map(ProductDto::toDto)
+                .collect(Collectors.toList());
     }
 
     // CacheEvict like in the same class is not working. It works if it was in a different class.
@@ -46,15 +51,16 @@ public class DefaultProductService implements ProductService {
     }
 
     @Override
-    public Product getProductById(int id) {
+    public ProductDto getProductById(int id) {
         var result = securityContextService.getCurrentUserId();
         var role = securityContextService.getCurrentUserRole();
         var email = securityContextService.getCurrentUserEmail();
         // todo validate request
 
-        // map result to dto and convert xml to a model
+        Product product = productRepository.findById(id);
+        ProductDto productDto = ProductDto.toDto(product);
 
-        return productRepository.findById(id);
+        return productDto;
     }
 
     @Override

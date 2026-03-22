@@ -4,7 +4,7 @@ import com.bearclawvisions.api.annotations.IsAdmin;
 import com.bearclawvisions.api.annotations.IsCustomer;
 import com.bearclawvisions.api.contracts.ApiResponse;
 import com.bearclawvisions.api.helpers.ApiResponseBuilder;
-import com.bearclawvisions.entitities.Product;
+import com.bearclawvisions.dto.product.ProductDto;
 import com.bearclawvisions.services.interfaces.ProductService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
@@ -26,12 +26,12 @@ public class ProductController {
 
     @IsAdmin
     @GetMapping() // index
-    public ResponseEntity<ApiResponse<List<Product>>> getAllProduct() {
+    public ResponseEntity<ApiResponse<List<ProductDto>>> getAllProduct() {
         return ApiResponseBuilder.success(productService.getAllProducts());
     }
 
     @GetMapping(PRODUCT_ID)
-    public ResponseEntity<ApiResponse<Product>> getProductById(@PathVariable int id) {
+    public ResponseEntity<ApiResponse<ProductDto>> getProductById(@PathVariable int id) {
         return ApiResponseBuilder.success(productService.getProductById(id));
     }
 

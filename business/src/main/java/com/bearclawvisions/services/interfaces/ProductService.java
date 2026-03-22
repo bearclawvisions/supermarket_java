@@ -1,13 +1,13 @@
 package com.bearclawvisions.services.interfaces;
 
-import com.bearclawvisions.entitities.Product;
+import com.bearclawvisions.dto.product.ProductDto;
 
 import java.util.List;
 
 public interface ProductService {
-    Product getProductById(int id);
+    ProductDto getProductById(int id);
     String getAdminProduct();
     String getCustomerProduct();
-    List<Product> getAllProducts();
+    List<ProductDto> getAllProducts();
     void deleteProductById(int id);
 }
