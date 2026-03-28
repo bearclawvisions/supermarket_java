@@ -104,6 +104,13 @@
         <version>${springdoc.version}</version>
       </dependency>
 
+      <!--dependency from the local repo, different project-->
+      <dependency>
+        <groupId>com.bearclawvisions</groupId>
+        <artifactId>Messaging</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+      </dependency>
+
       <!-- Testing -->
       <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
       <dependency>
@@ -121,7 +128,6 @@
         <plugin>
           <groupId>org.springframework.boot</groupId>
           <artifactId>spring-boot-maven-plugin</artifactId>
-          <version>${parent.version}</version>
           <configuration>
             <skip>${skip.build-image}</skip>
           </configuration>

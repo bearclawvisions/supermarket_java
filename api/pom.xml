@@ -130,12 +130,12 @@
 
           <!--run with:-->
           <!--docker container run -d -p 8080:8080 &#45;&#45;name SupermarketJava &#45;&#45;env-file .env api:1.0-SNAPSHOT-->
-          <execution>
-            <id>build-image</id>
-            <goals>
-              <goal>build-image</goal>
-            </goals>
-          </execution>
+<!--          <execution>-->
+<!--            <id>build-image</id>-->
+<!--            <goals>-->
+<!--              <goal>build-image</goal>-->
+<!--            </goals>-->
+<!--          </execution>-->
           <execution>
             <id>build-info</id>
             <goals>
