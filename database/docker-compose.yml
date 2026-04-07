@@ -1,0 +1,18 @@
+services:
+  postgres:
+    image: docker.io/library/postgres:18.3
+    container_name: supermarket-db
+    restart: unless-stopped
+    env_file:
+      - ../.env.docker
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - supermarket_db:/var/lib/postgresql
+
+volumes:
+  supermarket_db:

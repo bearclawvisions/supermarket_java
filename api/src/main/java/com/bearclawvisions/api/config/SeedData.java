@@ -24,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 
 @Component
 public class SeedData implements CommandLineRunner {
@@ -36,7 +37,8 @@ public class SeedData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-//        List<ProductCategory> categories = productCategoryRepository.findAll();
+//        List<ProductCategory> categories = productCategoryRepository.findAll()
+//                .orElseThrow(() -> new IllegalStateException("Failed to retrieve product categories"));
 //
 //        if (categories.isEmpty()) {
 //            seedDatabase();

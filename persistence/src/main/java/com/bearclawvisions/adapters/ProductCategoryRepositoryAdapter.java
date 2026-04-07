@@ -5,6 +5,7 @@ import com.bearclawvisions.ports.ProductCategoryRepository;
 import com.bearclawvisions.repositories.JpaProductCategoryRepository;
 import org.springframework.stereotype.Repository;
 
+import java.util.List;
 import java.util.Optional;
 
 @Repository
@@ -29,6 +30,11 @@ public class ProductCategoryRepositoryAdapter implements ProductCategoryReposito
     @Override
     public Optional<ProductCategory> findByDescription(String description) {
         return jpaProductCategoryRepository.findByDescription(description);
+    }
+
+    @Override
+    public Optional<List<ProductCategory>> findAll() {
+        return Optional.of(jpaProductCategoryRepository.findAll());
     }
 
     @Override
