@@ -1,5 +1,22 @@
 # podman compose --env-file .env.docker up -d --build
 services:
+  postgres:
+    image: docker.io/library/postgres:18.3
+    container_name: supermarket-db
+    restart: unless-stopped
+    env_file:
+      - ./.env.docker
+    environment:
+      POSTGRES_USER: ${DB_USERNAME}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
+    ports:
+      - "${DB_PORT}:5432"
+    volumes:
+      - supermarket_db:/var/lib/postgresql
+    networks:
+      - app_network
+
   api:
     build:
       context: .
@@ -8,15 +25,20 @@ services:
     env_file:
       - ./.env.docker
     environment:
-      DB_HOST: ${DB_HOST}
+      DB_HOST: postgres  # Use service name for internal networking
       DB_NAME: ${DB_NAME}
       DB_PASSWORD: ${DB_PASSWORD}
       DB_USERNAME: ${DB_USERNAME}
     ports:
       - "8080:8080"
     networks:
-      - database_default
+      - app_network
+    depends_on:
+      - postgres
+
+volumes:
+  supermarket_db:
 
 networks:
-  database_default:
-    external: true
+  app_network:
+    driver: bridge

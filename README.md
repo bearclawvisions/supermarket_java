@@ -61,4 +61,24 @@ In Java enums are more like a class with static final fields. They can have meth
 This allows for more complex behavior and state management within enums.  
 
 In Java enums are not compile time constants, like in C#. They are runtime constants. This means that you need a workaround to get compile time constants.  
-Duplication is inevitable, e.g. a role enum class can be used in the whole application, but to use the name as a constant you need to duplicate it to static final fields.  
+Duplication is inevitable, e.g. a role enum class can be used in the whole application, but to use the name as a constant you need to duplicate it to static final fields.
+
+# Docker
+Using the compose file with Podman. Replace podman with docker if you don't have podman installed.  
+
+```bash
+# Start everything
+podman compose up -d --build
+
+# Update only API after code changes
+podman compose up -d --build api
+
+# Restart only database (if needed)
+podman compose restart postgres
+
+# Stop everything but keep volumes
+podman compose down
+
+# Stop only API
+podman compose stop api
+```
