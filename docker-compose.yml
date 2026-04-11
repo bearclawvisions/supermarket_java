@@ -1,0 +1,22 @@
+# podman compose --env-file .env.docker up -d --build
+services:
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: supermarket-api
+    env_file:
+      - ./.env.docker
+    environment:
+      DB_HOST: ${DB_HOST}
+      DB_NAME: ${DB_NAME}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_USERNAME: ${DB_USERNAME}
+    ports:
+      - "8080:8080"
+    networks:
+      - database_default
+
+networks:
+  database_default:
+    external: true

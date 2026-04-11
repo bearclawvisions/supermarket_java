@@ -104,12 +104,12 @@
         <version>${springdoc.version}</version>
       </dependency>
 
-      <!--dependency from the local repo, different project-->
-      <dependency>
-        <groupId>com.bearclawvisions</groupId>
-        <artifactId>Messaging</artifactId>
-        <version>0.0.1-SNAPSHOT</version>
-      </dependency>
+<!--      &lt;!&ndash;dependency from the local repo, different project&ndash;&gt;-->
+<!--      <dependency>-->
+<!--        <groupId>com.bearclawvisions</groupId>-->
+<!--        <artifactId>Messaging</artifactId>-->
+<!--        <version>0.0.1-SNAPSHOT</version>-->
+<!--      </dependency>-->
 
       <!-- Testing -->
       <!-- https://mvnrepository.com/artifact/org.junit.jupiter/junit-jupiter-api -->
