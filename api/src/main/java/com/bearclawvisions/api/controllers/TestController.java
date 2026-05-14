@@ -27,7 +27,7 @@ public class TestController { // java has no [AllowAnonymous] like C#
     public ResponseEntity<ApiResponse<String>> hello() {
         // this creates a simple JSON response
         //Map.of("message", "Hello World, directly from API!")
-        return ApiResponseBuilder.success("Hello World, directly from API!");
+        return ApiResponseBuilder.successResponse(HttpStatus.OK, "Hello World, directly from API!");
     }
 
 
@@ -36,8 +36,8 @@ public class TestController { // java has no [AllowAnonymous] like C#
         var user = userService.getTestUser();
 
         if (user == null)
-            return ApiResponseBuilder.error(HttpStatus.NOT_FOUND, "User not found");
+            return ApiResponseBuilder.errorResponse(HttpStatus.NOT_FOUND, "User not found");
 
-        return ApiResponseBuilder.success(user);
+        return ApiResponseBuilder.successResponse(HttpStatus.OK, user);
     }
 }

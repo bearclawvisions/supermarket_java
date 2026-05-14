@@ -16,21 +16,21 @@ public class GlobalExceptionHandler {
 
     @ExceptionHandler(BusinessException.class)
     public ResponseEntity<ApiResponse<String>> handleBusinessException(BusinessException e) {
-        return ApiResponseBuilder.error(HttpStatus.BAD_REQUEST,"Business Error", List.of(e.getMessage()));
+        return ApiResponseBuilder.errorResponse(HttpStatus.BAD_REQUEST,"Business Error", List.of(e.getMessage()));
     }
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<ApiResponse<String>> handleGenericException(Exception e) {
-        return ApiResponseBuilder.error(HttpStatus.BAD_REQUEST, "Internal Server Error", List.of(e.getMessage()));
+        return ApiResponseBuilder.errorResponse(HttpStatus.INTERNAL_SERVER_ERROR, "Internal Server Error", List.of(e.getMessage()));
     }
 
     @ExceptionHandler(AuthorizationDeniedException.class)
     public ResponseEntity<ApiResponse<String>> handleSpringAuthorizationDeniedException(AuthorizationDeniedException e) {
-        return ApiResponseBuilder.error(HttpStatus.UNAUTHORIZED, "Unauthorized", List.of(e.getMessage()));
+        return ApiResponseBuilder.errorResponse(HttpStatus.UNAUTHORIZED, "Unauthorized", List.of(e.getMessage()));
     }
 
     @ExceptionHandler(SecurityException.class)
     public ResponseEntity<ApiResponse<String>> handleSecurityException(SecurityException e) {
-        return ApiResponseBuilder.error(HttpStatus.UNAUTHORIZED, "Unauthorized", List.of(e.getMessage()));
+        return ApiResponseBuilder.errorResponse(HttpStatus.UNAUTHORIZED, "Unauthorized", List.of(e.getMessage()));
     }
 }

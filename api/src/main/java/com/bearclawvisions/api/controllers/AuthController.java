@@ -8,6 +8,7 @@ import com.bearclawvisions.dto.user.LoginDto;
 import com.bearclawvisions.dto.user.RegisterDto;
 import com.bearclawvisions.dto.user.UserDto;
 import com.bearclawvisions.services.interfaces.UserService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -30,7 +31,7 @@ public class AuthController {
     @PostMapping("/register")
     public ResponseEntity<ApiResponse<String>> registerUser(@RequestBody RegisterDto userDto) {
         String result = userService.createUser(userDto);
-        return ApiResponseBuilder.success(result);
+        return ApiResponseBuilder.successResponse(HttpStatus.CREATED, result);
     }
 
     @PostMapping("/login")
@@ -45,7 +46,7 @@ public class AuthController {
 
         JwtAuthResponseDto authResponse = new JwtAuthResponseDto(token);
 
-        return ApiResponseBuilder.success(authResponse);
+        return ApiResponseBuilder.successResponse(HttpStatus.OK, authResponse);
     }
 
     // todo refresh token

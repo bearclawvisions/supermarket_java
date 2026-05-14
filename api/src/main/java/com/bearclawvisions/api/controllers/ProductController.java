@@ -5,6 +5,7 @@ import com.bearclawvisions.api.contracts.ApiResponse;
 import com.bearclawvisions.api.helpers.ApiResponseBuilder;
 import com.bearclawvisions.dto.product.ProductDto;
 import com.bearclawvisions.services.interfaces.ProductService;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.util.MimeTypeUtils;
 import org.springframework.web.bind.annotation.*;
@@ -26,25 +27,25 @@ public class ProductController {
     @IsAdmin
     @GetMapping() // index
     public ResponseEntity<ApiResponse<List<ProductDto>>> getAllProducts() {
-        return ApiResponseBuilder.success(productService.getAllProducts());
+        return ApiResponseBuilder.successResponse(HttpStatus.OK, productService.getAllProducts());
     }
 
     @GetMapping("/paged")
     public ResponseEntity<ApiResponse<List<ProductDto>>> getAllProductsPaged(
             @RequestParam(defaultValue = "0") int page,
             @RequestParam(defaultValue = "10") int pageSize) {
-        return ApiResponseBuilder.success(productService.getAllProductsByPage(page, pageSize));
+        return ApiResponseBuilder.successResponse(HttpStatus.OK, productService.getAllProductsByPage(page, pageSize));
     }
 
     @GetMapping(PRODUCT_ID)
     public ResponseEntity<ApiResponse<ProductDto>> getProductById(@PathVariable int id) {
-        return ApiResponseBuilder.success(productService.getProductById(id));
+        return ApiResponseBuilder.successResponse(HttpStatus.OK, productService.getProductById(id));
     }
 
     @DeleteMapping(PRODUCT_ID)
     public ResponseEntity<ApiResponse<String>> deleteProductById(@PathVariable int id) {
         productService.deleteProductById(id);
-        return ApiResponseBuilder.success("Product deleted successfully");
+        return ApiResponseBuilder.successResponse(HttpStatus.OK, "Product deleted successfully");
     }
 //
 //    @IsAdmin // can be applied to controller level as well, just like C#
