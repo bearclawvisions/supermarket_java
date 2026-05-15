@@ -27,8 +27,8 @@ services:
     environment:
       DB_HOST: postgres  # Use service name for internal networking
       DB_NAME: ${DB_NAME}
-      DB_PASSWORD: ${DB_PASSWORD}
-      DB_USERNAME: ${DB_USERNAME}
+      DB_API_PASSWORD: ${DB_API_PASSWORD}
+      DB_API_USERNAME: ${DB_API_USERNAME}
     ports:
       - "8080:8080"
     networks:
