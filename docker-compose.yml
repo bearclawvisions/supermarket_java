@@ -1,4 +1,5 @@
 # podman compose --env-file .env.docker up -d --build
+# podman compose --env-file .env.docker up -d postgres auth-service
 services:
   postgres:
     image: docker.io/library/postgres:18.3
@@ -13,9 +14,26 @@ services:
     ports:
       - "${DB_PORT}:5432"
     volumes:
-      - supermarket_db:/var/lib/postgresql
+      - database_supermarket_db:/var/lib/postgresql
     networks:
       - app_network
+
+  auth-service:
+    container_name: auth-service
+    image: localhost/auth-service:latest
+    ports:
+      - "9000:9000"
+    env_file:
+      - ./.env.docker
+    environment:
+      DB_AUTH_NAME: ${DB_AUTH_NAME}
+      DB_AUTH_PASSWORD: ${DB_AUTH_PASSWORD}
+      DB_AUTH_USERNAME: ${DB_AUTH_USERNAME}
+      JWT_SECRET: ${JWT_SECRET}
+    networks:
+      - app_network
+    depends_on:
+      - postgres
 
   api:
     build:
@@ -29,15 +47,18 @@ services:
       DB_NAME: ${DB_NAME}
       DB_API_PASSWORD: ${DB_API_PASSWORD}
       DB_API_USERNAME: ${DB_API_USERNAME}
+      JWT_SECRET: ${JWT_SECRET}
     ports:
       - "8080:8080"
     networks:
       - app_network
     depends_on:
       - postgres
+      - auth-service
 
 volumes:
-  supermarket_db:
+  database_supermarket_db:
+    external: true # use existing volume
 
 networks:
   app_network:
