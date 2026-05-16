@@ -1,6 +1,6 @@
 package com.bearclawvisions.api.helpers;
 
-import com.bearclawvisions.services.implementations.CurrentUser;
+import com.bearclawvisions.principal.CurrentUser;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.oauth2.jwt.Jwt;
 import org.springframework.security.oauth2.server.resource.authentication.JwtAuthenticationToken;

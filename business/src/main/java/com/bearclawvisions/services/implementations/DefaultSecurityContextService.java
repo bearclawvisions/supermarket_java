@@ -1,6 +1,7 @@
 package com.bearclawvisions.services.implementations;
 
 import com.bearclawvisions.enums.ApplicationRole;
+import com.bearclawvisions.principal.CurrentUser;
 import com.bearclawvisions.services.interfaces.SecurityContextService;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;

@@ -2,7 +2,7 @@ package com.bearclawvisions.api.config;
 
 import com.bearclawvisions.api.helpers.CustomJwtAuthToken;
 import com.bearclawvisions.enums.ApplicationRole;
-import com.bearclawvisions.services.implementations.CurrentUser;
+import com.bearclawvisions.principal.CurrentUser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.security.autoconfigure.actuate.web.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
@@ -53,7 +53,6 @@ public class SecurityConfig {
             .authorizeHttpRequests(authorize -> {
                 authorize.requestMatchers(
                         "/test/**",
-                        "/swagger-ui.html",
                         "/swagger-ui/**",
                         "/v3/api-docs/**"
                 ).permitAll();

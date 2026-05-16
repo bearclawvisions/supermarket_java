@@ -1,4 +1,4 @@
-package com.bearclawvisions.services.implementations;
+package com.bearclawvisions.principal;
 
 import com.bearclawvisions.enums.ApplicationRole;
 import org.springframework.security.core.GrantedAuthority;
