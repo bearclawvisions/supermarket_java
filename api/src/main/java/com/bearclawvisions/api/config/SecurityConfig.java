@@ -60,7 +60,6 @@ public class SecurityConfig {
                 authorize.anyRequest().authenticated();
             })
             .oauth2ResourceServer(oauth2 -> oauth2
-//                    .jwt(Customizer.withDefaults())
                     .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
             );
 
@@ -80,7 +79,6 @@ public class SecurityConfig {
 
                 return new CustomJwtAuthToken(jwt, authorities, principal);
             } catch (Exception e) {
-                // Log the error to see what's happening
                 System.err.println("Error converting JWT: " + e.getMessage());
                 System.err.println("JWT Claims: " + jwt.getClaims());
                 throw e;
