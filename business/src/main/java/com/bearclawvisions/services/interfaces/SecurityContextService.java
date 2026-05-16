@@ -6,7 +6,7 @@ import java.util.UUID;
 
 public interface SecurityContextService {
     UUID getCurrentUserId();
-    String getCurrentUserEmail();
+    String getCurrentUserFirstName();
     ApplicationRole getCurrentUserRole();
 
     /**

@@ -18,9 +18,9 @@ public class DefaultSecurityContextService implements SecurityContextService {
     }
 
     @Override
-    public String getCurrentUserEmail() {
+    public String getCurrentUserFirstName() {
         CurrentUser user = getCurrentUser();
-        return user.email();
+        return user.firstName();
     }
 
     @Override

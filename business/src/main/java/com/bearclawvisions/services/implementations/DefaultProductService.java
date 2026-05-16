@@ -67,7 +67,7 @@ public class DefaultProductService implements ProductService {
     public ProductDto getProductById(int id) {
         var result = securityContextService.getCurrentUserId();
         var role = securityContextService.getCurrentUserRole();
-        var email = securityContextService.getCurrentUserEmail();
+        var email = securityContextService.getCurrentUserFirstName();
         // todo validate request
 
         Product product = productRepository.findById(id);

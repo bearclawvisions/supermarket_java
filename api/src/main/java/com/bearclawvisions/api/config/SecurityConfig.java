@@ -1,39 +1,37 @@
 package com.bearclawvisions.api.config;
 
-import com.bearclawvisions.api.helpers.JwtUtil;
-import com.bearclawvisions.api.middleware.JwtAuthFilter;
-import com.bearclawvisions.services.implementations.UserDetailService;
-import jakarta.servlet.http.HttpServletResponse;
+import com.bearclawvisions.api.helpers.CustomJwtAuthToken;
+import com.bearclawvisions.enums.ApplicationRole;
+import com.bearclawvisions.services.implementations.CurrentUser;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.boot.security.autoconfigure.actuate.web.servlet.EndpointRequest;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.core.annotation.Order;
-import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.config.Customizer;
-import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
-import org.springframework.security.config.http.SessionCreationPolicy;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.oauth2.jwt.Jwt;
+import org.springframework.security.oauth2.jwt.JwtDecoder;
+import org.springframework.security.oauth2.jwt.NimbusJwtDecoder;
+import org.springframework.security.oauth2.server.resource.authentication.JwtGrantedAuthoritiesConverter;
 import org.springframework.security.web.SecurityFilterChain;
-import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+
+import java.util.Collection;
+import java.util.UUID;
 
 @Configuration // automagically injected by component scan
 @EnableWebSecurity
 @EnableMethodSecurity(securedEnabled = true) // this allows for bean validation on endpoints with PreAuthorize
 public class SecurityConfig {
 
-    private final UserDetailService userDetailService;
-    private final JwtUtil jwtUtil;
-
-    public SecurityConfig(UserDetailService userDetailService, JwtUtil jwtUtil) {
-        this.userDetailService = userDetailService;
-        this.jwtUtil = jwtUtil;
-    }
-
+    @Value("${spring.security.oauth2.resourceserver.jwt.jwk-set-uri}")
+    private String jwkSetUri;
 
     @Bean
     @Order(1)
@@ -47,43 +45,66 @@ public class SecurityConfig {
     }
 
     @Bean
-//    @Scope("singleton") // scope in java defaults to singleton, not scoped per webrequest
     @Order(2)
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf(AbstractHttpConfigurer::disable) // c -> c.disable()
             .httpBasic(AbstractHttpConfigurer::disable) // h -> h.disable()
             .cors(Customizer.withDefaults())
-            .authorizeHttpRequests(request -> request
-                .requestMatchers(
-                    "/test/**",
-                    "/auth/**",
-                    "/swagger-ui.html",
-                    "/swagger-ui/**",
-                    "/v3/api-docs/**"
-                ).permitAll()
-                .anyRequest().authenticated()
-            )
-            .userDetailsService(userDetailService) // todo currently not actually being used?
-            .exceptionHandling(exceptionHandling -> exceptionHandling
-                    .authenticationEntryPoint((request, response, authException) ->
-                            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, "Unauthorized")))
-            .sessionManagement(sessionManagement -> sessionManagement
-                    .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-            .addFilterBefore(new JwtAuthFilter(jwtUtil), UsernamePasswordAuthenticationFilter.class);;
+            .authorizeHttpRequests(authorize -> {
+                authorize.requestMatchers(
+                        "/test/**",
+                        "/swagger-ui.html",
+                        "/swagger-ui/**",
+                        "/v3/api-docs/**"
+                ).permitAll();
+                authorize.anyRequest().authenticated();
+            })
+            .oauth2ResourceServer(oauth2 -> oauth2
+//                    .jwt(Customizer.withDefaults())
+                    .jwt(jwt -> jwt.jwtAuthenticationConverter(jwtAuthenticationConverter()))
+            );
 
         return http.build();
     }
 
     @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
+    public JwtDecoder jwtDecoder() {
+        return NimbusJwtDecoder.withJwkSetUri(jwkSetUri).build();
     }
 
-    @Bean
-    public AuthenticationManager authenticationManagerBean(HttpSecurity http) throws Exception {
-        AuthenticationManagerBuilder authenticationManagerBuilder = http.getSharedObject(AuthenticationManagerBuilder.class);
-        authenticationManagerBuilder.userDetailsService(userDetailService).passwordEncoder(passwordEncoder());
+    private Converter<Jwt, AbstractAuthenticationToken> jwtAuthenticationConverter() {
+        return jwt -> {
+            try {
+                Collection<GrantedAuthority> authorities = extractAuthorities(jwt);
+                CurrentUser principal = extractPrincipal(jwt, authorities);
 
-        return authenticationManagerBuilder.build();
+                return new CustomJwtAuthToken(jwt, authorities, principal);
+            } catch (Exception e) {
+                // Log the error to see what's happening
+                System.err.println("Error converting JWT: " + e.getMessage());
+                System.err.println("JWT Claims: " + jwt.getClaims());
+                throw e;
+            }
+        };
+    }
+
+    // For using the PreAuthorize annotation
+    private Collection<GrantedAuthority> extractAuthorities(Jwt jwt) {
+        JwtGrantedAuthoritiesConverter converter = new JwtGrantedAuthoritiesConverter();
+        converter.setAuthoritiesClaimName("role");
+        converter.setAuthorityPrefix("ROLE_");
+        return converter.convert(jwt);
+    }
+
+    // Construct the CurrentUser object
+    private CurrentUser extractPrincipal(Jwt jwt, Collection<GrantedAuthority> authorities) {
+        ApplicationRole role = ApplicationRole.valueOf(jwt.getClaimAsString("role"));
+
+        return new CurrentUser(
+                UUID.fromString(jwt.getClaimAsString("id")),
+                jwt.getSubject(),
+                role,
+                authorities
+        );
     }
 }
